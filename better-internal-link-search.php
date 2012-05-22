@@ -1,46 +1,79 @@
 <?php
 /*
 Plugin Name: Better Internal Link Search
-Version: 0.1
-Description: Limit search to the post title when adding links to content or adding pages to a menu.
+Plugin URI: https://github.com/bradyvercher/wp-better-internal-link-search
+Version: 1.0
+Description: Search by post or page title when adding links into the editor or adding pages to a nav menu.
 Author: Blazer Six, Inc.
 Author URI: http://www.blazersix.com/
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+------------------------------------------------------------------------
+Copyright 2012  Blazer Six, Inc.
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/**
-On sites with a large number of posts/pages, the search feature quickly becomes useless when trying to
-link content because WordPress defaults to searching the title and content fields. This plugin helps remedy
-that by limiting searches to the title field only. It works when creating internal links with the
-"Insert/edit link" popup in the editor and when searching for pages to add to a menu.
 
-For a slight producivity boost, it also automatically searches for the selected text when the link button
-is clicked on the editor toolbar.
-*/
+Blazer_Six_Better_Internal_Link_Search::start();
 
 
 class Blazer_Six_Better_Internal_Link_Search {
-	function __construct() {
-		add_action( 'plugins_loaded', array( &$this, 'load_plugin' ) );
+	/**
+	 * Start when plugins are loaded
+	 * 
+	 * @since 1.0
+	 */
+	function start() {
+		add_action( 'plugins_loaded', array( __CLASS__, 'load_plugin' ) );
 	}
-	
-	
+
+	/**
+	 * Hook into actions to execute when needed
+	 * 
+	 * @since 1.0
+	 */
 	function load_plugin() {
-		add_action( 'admin_init', array( &$this, 'admin_init' ) );
-		add_action( 'admin_footer-post.php', array( &$this, 'admin_footer' ) );
+		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
+		add_action( 'admin_footer-post.php', array( __CLASS__, 'admin_footer' ) );
+		add_action( 'admin_footer-post-new.php', array( __CLASS__, 'admin_footer' ) );
 	}
 	
-	
+	/**
+	 * Add a filter to limit search results
+	 * 
+	 * The filter is only attached when a request comes from the Pages meta
+	 * box on the Menus screen or from the "Insert/edit link" editor popup.
+	 * 
+	 * @since 1.0
+	 */
 	function admin_init() {
 		if ( defined('DOING_AJAX') && DOING_AJAX && isset( $_POST['action'] ) ) {
 			if ( 'menu-quick-search' == $_POST['action'] || 'wp-link-ajax' == $_POST['action'] ) {
-				add_filter( 'posts_search', array( &$this, 'limit_search_to_title' ), 10, 2 );
+				add_filter( 'posts_search', array( __CLASS__, 'limit_search_to_title' ), 10, 2 );
 			}
 		}
 	}
 	
-	
 	/**
-	 * Mostly comes from wp-includes/query.php
+	 * Limits search queries to the post title field
+	 * 
+	 * @see wp-includes/query.php
+	 * 
+	 * @since 1.0
 	 */
 	function limit_search_to_title( $search, &$wp_query ) {
 		global $wpdb;
@@ -67,9 +100,15 @@ class Blazer_Six_Better_Internal_Link_Search {
 		return $search;
 	}
 	
-	
 	/**
-	 * Automatically searches for the selected text when using internal linking
+	 * Javascript to automatically search for selected text
+	 * 
+	 * Inserts any text selected in the editor into the search field in the
+	 * "Insert/edit link" popup when the link button in the toolbar is
+	 * clicked. Automatically executes a search request and returns the
+	 * results.
+	 * 
+	 * @since 1.0
 	 */
 	function admin_footer() {
 		?>
@@ -109,5 +148,4 @@ class Blazer_Six_Better_Internal_Link_Search {
 		<?php
 	}
 }
-$blazersix_better_internal_link_search = new Blazer_Six_Better_Internal_Link_Search();
 ?>
