@@ -2,7 +2,7 @@
 /*
 Plugin Name: Better Internal Link Search
 Plugin URI: http://wordpress.org/extend/plugins/better-internal-link-search/
-Version: 1.0
+Version: 1.1
 Description: Search by post or page title when adding links into the editor or adding pages to a nav menu.
 Author: Blazer Six, Inc.
 Author URI: http://www.blazersix.com/
@@ -32,6 +32,8 @@ Blazer_Six_Better_Internal_Link_Search::start();
 
 
 class Blazer_Six_Better_Internal_Link_Search {
+	static $s;
+	
 	/**
 	 * Start when plugins are loaded
 	 * 
@@ -47,6 +49,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 	 * @since 1.0
 	 */
 	function load_plugin() {
+		add_action( 'wp_ajax_bils_get_terms', array( __CLASS__, 'ajax_get_terms' ) );
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 		add_action( 'admin_footer-post.php', array( __CLASS__, 'admin_footer' ) );
 		add_action( 'admin_footer-post-new.php', array( __CLASS__, 'admin_footer' ) );
@@ -101,6 +104,94 @@ class Blazer_Six_Better_Internal_Link_Search {
 	}
 	
 	/**
+	 * Returns term search results
+	 *
+	 * Results return in a format expected by the internal link manager.
+	 * 
+	 * @since 1.1
+	 */
+	function ajax_get_terms() {
+		global $wpdb;
+		
+		check_ajax_referer( 'internal-linking', '_ajax_linking_nonce' );
+		
+		if ( isset( $_POST['search'] ) ) {
+			$s = stripslashes( $_POST['search'] );
+			$search = '%' . like_escape( $s ) . '%';
+			$terms = $wpdb->get_results( $wpdb->prepare( "SELECT t.term_id, t.name, tt.taxonomy
+				FROM $wpdb->terms t
+				INNER JOIN $wpdb->term_taxonomy tt ON t.term_id=tt.term_id
+				WHERE t.name LIKE %s
+				ORDER BY name ASC", $search ) );
+			
+			if ( $terms ) {
+				foreach ( $terms as $term ) {
+					$taxonomy = get_taxonomy( $term->taxonomy );
+					
+					$results[] = array(
+						'title' => trim( esc_html( strip_tags( $term->name ) ) ),
+						'permalink' => get_term_link( (int) $term->term_id, $term->taxonomy ),
+						'info' => $taxonomy->labels->singular_name
+					);
+				}
+				
+				//$results = self::sort_results( $results, $s );
+				self::$s = $s;
+				usort( $results, array( __CLASS__, 'sort_results' ) );
+			}
+		}
+		
+	
+		if ( ! isset( $results ) )
+			wp_die( 0 );
+	
+		echo json_encode( $results );
+		echo "\n";
+	
+		wp_die();
+	}
+	
+	/**
+	 * Custom results sorter
+	 * 
+	 * Attempts to return results in a more natural order. Titles that exactly match
+	 * a search query are returned first, followed by titles that begin with the query.
+	 * Remaining results are sorted alphabetically.
+	 *
+	 * TODO: Potentially remove articles when doing matches.
+	 *
+	 * @since 1.1
+	 */
+	function sort_results( $a, $b ) {
+		$a_title = mb_strtolower( $a['title'] );
+		$b_title = mb_strtolower( $b['title'] );
+		$s = mb_strtolower( self::$s );
+		
+		if ( $a_title == $b_title ) {
+			return 0;
+		}
+		
+		if ( $s == $a_title ) {
+			return -1;
+		} elseif ( $s == $b_title ) {
+			return 1;
+		}
+		
+		$a_strpos = mb_strpos( $a_title, $s );
+		$b_strpos = mb_strpos( $b_title, $s );
+		if ( 0 === $a_strpos && 0 === $b_strpos ) {
+			// return the shorter title first
+			return ( mb_strlen( $a_title ) < mb_strlen( $b_title ) ) ? -1 : 1;
+		} elseif ( 0 === $a_strpos ) {
+			return -1;
+		} elseif ( 0 === $b_strpos ) {
+			return 1;	
+		}
+		
+		return strcmp( $a_title, $b_title );
+	}
+	
+	/**
 	 * Javascript to automatically search for selected text
 	 * 
 	 * Inserts any text selected in the editor into the search field in the
@@ -142,6 +233,31 @@ class Blazer_Six_Better_Internal_Link_Search {
 				if ( searchTerm.length ) {
 					$('#search-field').val( $.trim(searchTerm) ).keyup();
 				}
+				
+				/**
+				 * Term Search Functionality
+				 */
+				if ( !$('#bils-search-type-content').is('input') ) {
+					$('div.link-search-wrapper', '#search-panel').append('<label style="margin: 0 10px"><input type="radio" name="bils_search_type" id="bils-search-type-content" class="bils-search-type" checked="checked" /> Posts</label> <label><input type="radio" name="bils_search_type" id="bils-search-type-terms" class="bils-search-type" /> Terms</label>');
+					$('input.bils-search-type', '#search-panel').on('click', function() {
+						var searchField = $('#search-field'),
+							s = searchField.val();
+						
+						// a wee bit hackish
+						searchField.val('better-internal-link-search-reset-river-flag').keyup().val(s).keyup().focus()[0].select();
+					});
+				}
+				
+				// filter ajax requests in order to send the right action
+				$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+					if ( $('#bils-search-type-terms').prop('checked') && -1 != options.data.indexOf('wp-link-ajax') ) {
+						// abort the request if it's just for resetting the river
+						if ( -1 != options.data.indexOf('better-internal-link-search-reset-river-flag') )
+							jqXHR.abort();
+						
+						options.data = options.data.replace('action=wp-link-ajax', 'action=bils_get_terms');
+					}
+				});
 			});
 		});
 		</script>
