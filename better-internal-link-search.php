@@ -49,7 +49,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 	 * @since 1.0
 	 */
 	function load_plugin() {
-		add_action( 'wp_ajax_bils_get_terms', array( __CLASS__, 'ajax_get_terms' ) );
+		add_action( 'wp_ajax_bils-get-link-search-results', array( __CLASS__, 'ajax_get_link_search_results' ) );
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 		add_action( 'admin_footer-post.php', array( __CLASS__, 'admin_footer' ) );
 		add_action( 'admin_footer-post-new.php', array( __CLASS__, 'admin_footer' ) );
@@ -65,7 +65,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 	 */
 	function admin_init() {
 		if ( defined('DOING_AJAX') && DOING_AJAX && isset( $_POST['action'] ) ) {
-			if ( 'menu-quick-search' == $_POST['action'] || 'wp-link-ajax' == $_POST['action'] ) {
+			if ( 'bils-get-link-search-results' == $_POST['action'] || 'menu-quick-search' == $_POST['action'] || 'wp-link-ajax' == $_POST['action'] ) {
 				add_filter( 'posts_search', array( __CLASS__, 'limit_search_to_title' ), 10, 2 );
 			}
 		}
@@ -104,19 +104,30 @@ class Blazer_Six_Better_Internal_Link_Search {
 	}
 	
 	/**
-	 * Returns term search results
+	 * Returns search results
 	 *
 	 * Results return in a format expected by the internal link manager.
+	 * Doesn't have support for paging.
 	 * 
 	 * @since 1.1
 	 */
-	function ajax_get_terms() {
+	function ajax_get_link_search_results() {
 		global $wpdb;
 		
 		check_ajax_referer( 'internal-linking', '_ajax_linking_nonce' );
 		
 		if ( isset( $_POST['search'] ) ) {
 			$s = stripslashes( $_POST['search'] );
+			
+			$args = array(
+				's' => $s,
+				'pagenum' => 1
+			);
+			
+			require_once(ABSPATH . WPINC . '/class-wp-editor.php');
+			$results = _WP_Editors::wp_link_query( $args );
+			
+			
 			$search = '%' . like_escape( $s ) . '%';
 			$terms = $wpdb->get_results( $wpdb->prepare( "SELECT t.term_id, t.name, tt.taxonomy
 				FROM $wpdb->terms t
@@ -134,10 +145,11 @@ class Blazer_Six_Better_Internal_Link_Search {
 						'info' => $taxonomy->labels->singular_name
 					);
 				}
-				
-				//$results = self::sort_results( $results, $s );
+			}
+			
+			if ( $results ) {
 				self::$s = $s;
-				usort( $results, array( __CLASS__, 'sort_results' ) );
+				usort( $results, array( __CLASS__, 'sort_results' ) );	
 			}
 		}
 		
@@ -158,7 +170,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 	 * a search query are returned first, followed by titles that begin with the query.
 	 * Remaining results are sorted alphabetically.
 	 *
-	 * TODO: Potentially remove articles when doing matches.
+	 * TODO: Potentially remove articles (a, an, the) when doing matches.
 	 *
 	 * @since 1.1
 	 */
@@ -205,6 +217,13 @@ class Blazer_Six_Better_Internal_Link_Search {
 		?>
 		<script type="text/javascript">
 		jQuery(function($) {
+			// hijack ajax requests and replace with a custom action
+			$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+				if ( -1 != options.data.indexOf('search=') ) {
+					options.data = options.data.replace('action=wp-link-ajax', 'action=bils-get-link-search-results');
+				}
+			});
+				
 			$('#wp-link').bind('wpdialogbeforeopen', function() {
 				var searchTerm = '';
 				
@@ -234,9 +253,8 @@ class Blazer_Six_Better_Internal_Link_Search {
 					$('#search-field').val( $.trim(searchTerm) ).keyup();
 				}
 				
-				/**
-				 * Term Search Functionality
-				 */
+				/*
+				Prototype for selecting entities to search
 				if ( !$('#bils-search-type-content').is('input') ) {
 					$('div.link-search-wrapper', '#search-panel').append('<label style="margin: 0 10px"><input type="radio" name="bils_search_type" id="bils-search-type-content" class="bils-search-type" checked="checked" /> Posts</label> <label><input type="radio" name="bils_search_type" id="bils-search-type-terms" class="bils-search-type" /> Terms</label>');
 					$('input.bils-search-type', '#search-panel').on('click', function() {
@@ -255,9 +273,10 @@ class Blazer_Six_Better_Internal_Link_Search {
 						if ( -1 != options.data.indexOf('better-internal-link-search-reset-river-flag') )
 							jqXHR.abort();
 						
-						options.data = options.data.replace('action=wp-link-ajax', 'action=bils_get_terms');
+						options.data = options.data.replace('action=wp-link-ajax', 'action=bils-get-link-search-results');
 					}
 				});
+				*/
 			});
 		});
 		</script>

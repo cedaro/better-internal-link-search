@@ -1,7 +1,7 @@
 === Better Internal Link Search ===
 Contributors: blazersix, bradyvercher
 Tags: links, internal links, search, editor, nav menus
-Requires at least: 3.3.2
+Requires at least: 3.4
 Tested up to: 3.4.1
 Stable tag: 1.0
 License: GPLv2 or later
