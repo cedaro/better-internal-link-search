@@ -147,9 +147,48 @@ class Blazer_Six_Better_Internal_Link_Search {
 				}
 			}
 			
-			if ( $results ) {
+			if ( ! empty( $results ) ) {
 				self::$s = $s;
+				$results = apply_filters( 'better_internal_link_search_results', $results, $args );
 				usort( $results, array( __CLASS__, 'sort_results' ) );	
+			} else {
+				$results = array();	
+			}
+			
+			
+			$shortcuts = apply_filters( 'better_internal_link_search_shortcuts', array(
+				'home' => array(
+					'title' => 'Home',
+					'permalink' => home_url( '/' )
+				),
+				'siteurl' => array(
+					'title' => 'Site URL',
+					'permalink' => site_url( '/' )
+				),
+				'theme' => array(
+					'title' => 'Theme URL',
+					'permalink' => get_stylesheet_directory_uri() . '/'
+				)
+			) );
+			
+			// sanitize the shortcuts a bit
+			foreach( $shortcuts as $key => $shortcut ) {
+				if ( empty( $shortcut['title'] ) || empty( $shortcut['permalink'] ) ) {
+					unset( $shortcuts[ $key ] );
+					break;
+				}
+				
+				if ( empty( $shortcut['info'] ) )
+					$shortcuts[ $key ]['info'] = 'Shortcut';
+				
+				$shortcuts[ $key ]['title'] = trim( esc_html( strip_tags( $shortcut['title'] ) ) );
+				$shortcuts[ $key ]['info'] = trim( esc_html( strip_tags( $shortcuts[ $key ]['info'] ) ) );
+			}
+			
+			if ( array_key_exists( $s, $shortcuts ) ) {
+				array_unshift( $results, $shortcuts[ $s ] );
+			} elseif ( 'shortcuts' == $s ) {
+				$results = array_merge( $shortcuts, $results );	
 			}
 		}
 		
