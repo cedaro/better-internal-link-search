@@ -13,7 +13,7 @@ Improve the internal link manager search with enhanced functionality.
 
 Better Internal Link Search improves the default internal link searching feature in a number of ways, making it faster and easier to find the content you want to link to.
 
-The most basic feature limits results to posts and pages that contain your search query in their titles, rather than returning every post that contains the query in the title *or* content fields--this greatly reduces the number of results on sites with a large amount of content and should improve accuracy. In addition, term archives are included in the results so you can more easily link to them.
+The most basic feature limits results to posts and pages that contain your search query in their titles, rather than returning every post that contains the query in the title *or content fields*--this greatly reduces the number of results on sites with a large amount of content and should improve accuracy. In addition, term archives are included in the results so you can more easily link to them.
 
 Beyond those simple changes are more powerful features that can be customized for your particular site, including creating shortcuts and even searching external sites without leaving WordPress!
 
@@ -30,7 +30,7 @@ Beyond those simple changes are more powerful features that can be customized fo
 
 = Shortcuts =
 
-Type 'home' or 'siteurl' in the search field and quickly get links to those locations.  Additional shortcuts can be added with a little bit of code in your functions.php, so if you find yourself linking to a particular URL over and over again, add a shortcut and save yourself some time!
+Type `home` or `siteurl` in the search field and quickly get links to those locations.  Additional shortcuts can be added with a little bit of code in your functions.php, so if you find yourself linking to a particular URL over and over again, add a shortcut and save yourself some time!
 
 = Search Modifiers =
 
@@ -40,19 +40,19 @@ Search modifiers are the most powerful feature of Better Internal Link Search, b
 
 A few simple modifiers have been included by default and should serve as examples for developers that want to create their own or change the syntax. Basic support is built in for Wikipedia, iTunes, Spotify, the WordPress plugin directory, the Codex, GitHub repositories, listing a user's GitHub Gists, and linking to author archive URLs.
 
-Type '-help' in the search field to view the available modifiers.
+Type `-help` in the search field to view the available modifiers.
 
 == Installation ==
 
 Installing Better Internal Link Search is just like installing most other plugins. [Check out the codex](http://codex.wordpress.org/Managing_Plugins#Installing_Plugins) if you have any questions.
 
-== FAQ ==
+== Frequently Asked Questions ==
 
 = How do I know which shortcuts are available? =
-Type 'shortcuts' in the search field and all of your registered shortcuts will be listed.
+Type `shortcuts` in the search field and all of your registered shortcuts will be listed.
 
 = How do I know which modifiers are available? =
-Type '-' or '-help' in the search field and the search modifiers will be listed with their syntax and a brief description about what they do.
+Type `-` or `-help` in the search field and the search modifiers will be listed with their syntax and a brief description about what they do.
 
 == Screenshots ==
 
