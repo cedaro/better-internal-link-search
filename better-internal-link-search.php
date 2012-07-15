@@ -3,7 +3,7 @@
 Plugin Name: Better Internal Link Search
 Plugin URI: http://wordpress.org/extend/plugins/better-internal-link-search/
 Version: 1.1
-Description: Search by post or page title when adding links into the editor or adding pages to a nav menu.
+Description: Improve the internal link popup functionality with time saving enhancements and features.
 Author: Blazer Six, Inc.
 Author URI: http://www.blazersix.com/
 License: GPLv2 or later
