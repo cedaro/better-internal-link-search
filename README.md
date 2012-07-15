@@ -6,6 +6,8 @@ The most basic feature limits results to posts and pages that contain your searc
 
 Beyond those simple changes are more powerful features that can be customized for your particular site, including creating shortcuts and even searching external sites without leaving WordPress!
 
+## Improvements and Features ##
+
 * Search by post or page title when adding links to the editor or adding pages to a nav menu.
 * Includes terms from any taxonomy in the search results so you can easily link to term archives.
 * Scheduled posts are included in search results.
@@ -17,9 +19,9 @@ Beyond those simple changes are more powerful features that can be customized fo
 
 ## Shortcuts ##
 
-Type 'home' or 'siteurl' in the search field and quickly get links to those locations.  Additional shortcuts can be added with a little bit of code in your functions.php, so if you find yourself linking to a particular URL over and over again, add a shortcut and save yourself some time!
+Type `home` or `siteurl` in the search field and quickly get links to those locations.  Additional shortcuts can be added with a little bit of code in your functions.php, so if you find yourself linking to a particular URL over and over again, add a shortcut and save yourself some time!
 
-If you don't remember which shortcuts have been registered, type 'shortcuts' to list them all.
+If you don't remember which shortcuts have been registered, type `shortcuts` to list them all.
 
 ## Search Modifiers ##
 
@@ -29,9 +31,9 @@ Search modifiers are the most powerful feature of Better Internal Link Search, b
 
 A few simple modifiers have been included by default and should serve as examples for developers that want to create their own or change the syntax. Basic support is built in for searching Wikipedia, iTunes, Spotify, the WordPress plugin directory, the WordPress Codex, GitHub repositories, listing a user's GitHub Gists, and linking to WordPress author archive URLs.
 
-Type '-help' in the search field to view the available modifiers.
+Type `-help` in the search field to view the available modifiers.
 
 ## Credits ##
 
-Built by Brady Vercher ([@bradyvercher](http://twitter.com/bradyvercher))
+Built by Brady Vercher ([@bradyvercher](http://twitter.com/bradyvercher))  
 Copyright 2012  Blazer Six, Inc.(http://www.blazersix.com/) ([@blazersix](http://twitter.com/BlazerSix))
