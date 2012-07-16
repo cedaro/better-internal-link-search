@@ -34,7 +34,7 @@ Type `home` or `siteurl` in the search field and quickly get links to those loca
 
 = Search Modifiers =
 
-Search modifiers are the most powerful feature of Better Internal Link Search, but can also be a little more complex to use, but they can save a lot of time when repeatedly linking to external websites. For example, searching for the term 'interrobang' on Wikipedia would look like this:
+Search modifiers are the most powerful feature of Better Internal Link Search. Although they can be a bit more complex to use, they have the potential to save a lot of time when repeatedly linking to external websites. For example, searching for the term 'interrobang' on Wikipedia would look like this:
 
 `-wikipedia interrobang`
 
