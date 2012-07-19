@@ -3,7 +3,7 @@ Contributors: blazersix, bradyvercher
 Tags: links, internal links, search, editor, nav menus
 Requires at least: 3.4
 Tested up to: 3.4.1
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,9 @@ Type `-` or `-help` in the search field and the search modifiers will be listed 
 5. A search modifier in action.
 
 == Changelog ==
+
+= 1.1.1 =
+* Fixed bug preventing link popup from opening in HTML mode
 
 = 1.1 =
 * Include term archives in results.
