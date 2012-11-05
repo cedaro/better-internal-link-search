@@ -27,40 +27,40 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+/**
+ * Load the plugin.
+ */
+if ( is_admin() ) {
+	add_action( 'plugins_loaded', array( 'Blazer_Six_Better_Internal_Link_Search', 'load' ) );
+}
 
-Blazer_Six_Better_Internal_Link_Search::start();
-
-
+/**
+ * Main plugin class.
+ *
+ * @since 1.0
+ */
 class Blazer_Six_Better_Internal_Link_Search {
 	private static $s;
 	
 	/**
-	 * Start when plugins are loaded
+	 * Hook into actions to execute when needed.
 	 * 
 	 * @since 1.0
 	 */
-	public static function start() {
-		add_action( 'plugins_loaded', array( __CLASS__, 'load_plugin' ) );
-	}
-
-	/**
-	 * Hook into actions to execute when needed
-	 * 
-	 * @since 1.0
-	 */
-	public static function load_plugin() {
+	public static function load() {
 		if ( isset( $_POST['search'] ) ) {
 			remove_action( 'wp_ajax_wp-link-ajax', 'wp_link_ajax', 1 );
 			add_action( 'wp_ajax_wp-link-ajax', array( __CLASS__, 'ajax_get_link_search_results' ), 1 );
 			#add_action( 'wp_ajax_bils-get-link-search-results', array( __CLASS__, 'ajax_get_link_search_results' ) );
 		}
+		
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 		add_action( 'admin_footer-post.php', array( __CLASS__, 'admin_footer' ) );
 		add_action( 'admin_footer-post-new.php', array( __CLASS__, 'admin_footer' ) );
 	}
 	
 	/**
-	 * Add a filter to limit search results
+	 * Add a filter to limit search results.
 	 * 
 	 * The filter is only attached when a request comes from the Pages meta
 	 * box on the Menus screen or from the "Insert/edit link" editor popup.
@@ -70,7 +70,8 @@ class Blazer_Six_Better_Internal_Link_Search {
 	public static function admin_init() {
 		add_filter( 'better_internal_link_search_modifier-help', array( __CLASS__, 'search_modifier_help' ), 10, 2 );
 		
-		if ( add_filter( 'better_internal_link_search_load_default_modifiers', true ) ) {
+		// Disable default search modifiers by returning false for this filter.
+		if ( apply_filters( 'better_internal_link_search_load_default_modifiers', true ) ) {
 			include ( plugin_dir_path(__FILE__) . 'search-modifiers.php' );
 		}
 		
@@ -89,15 +90,15 @@ class Blazer_Six_Better_Internal_Link_Search {
 	}
 	
 	/**
-	 * Set query vars in pre_get_posts
+	 * Set query vars in pre_get_posts.
 	 *
-	 * Includes scheduled posts in search results and disables paging
+	 * Includes scheduled posts in search results and disables paging.
 	 *
 	 * @since 1.1
 	 */
 	public static function set_query_vars( $query ) {
 		if ( 'bils-get-link-search-results' == $_POST['action'] || 'wp-link-ajax' == $_POST['action'] ) {
-			// Scheduled post concept from Evan Solomon's plugin
+			// Scheduled post concept from Evan Solomon's plugin.
 			// http://wordpress.org/extend/plugins/internal-linking-for-scheduled-posts/
 			$post_status = (array) $query->get( 'post_status' );
 			if ( ! in_array( 'future', $post_status ) ) {
@@ -105,14 +106,14 @@ class Blazer_Six_Better_Internal_Link_Search {
 				$query->set( 'post_status', $post_status );
 			}
 			
-			// paging won't work with multiple data sources and ideally the search term
-			// should be unique enough that there aren't a ton of matches
+			// Paging won't work with multiple data sources and ideally the search term
+			// should be unique enough that there aren't a ton of matches.
 			$query->set( 'posts_per_page', -1 );
 		}
 	}
 	
 	/**
-	 * Limits search queries to the post title field
+	 * Limits search queries to the post title field.
 	 * 
 	 * @see wp-includes/query.php
 	 * 
@@ -144,7 +145,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 	}
 	
 	/**
-	 * Returns search results
+	 * Returns search results.
 	 *
 	 * Results returned in a format expected by the internal link manager.
 	 * Doesn't have support for paging.
@@ -165,9 +166,9 @@ class Blazer_Six_Better_Internal_Link_Search {
 			
 			$args['s'] = $s;
 			$args['page'] = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
-			$args['per_page'] = 20; // default for usage in filters, otherwise, it shouldn't do anything
+			$args['per_page'] = 20; // Default for usage in filters, otherwise, it shouldn't do anything.
 			
-			// check to see if the request is prepended with a modifier (ex: -wikipedia interrobang, -spotify:artist willie nelson)
+			// Check to see if the request is prepended with a modifier (ex: -wikipedia interrobang, -spotify:artist willie nelson).
 			if ( 0 === mb_strpos( $s, '-' ) ) {
 				preg_match( '/-([^\s]+)\s?(.*)?/', $s, $matches );
 				
@@ -182,13 +183,13 @@ class Blazer_Six_Better_Internal_Link_Search {
 				}
 			}
 			
-			// allow plugins to intercept the request and add their own results or short-circuit execution
+			// Allow plugins to intercept the request and add their own results or short-circuit execution.
 			$pre_results = (array) apply_filters( 'pre_better_internal_link_search_results', array(), $args );
 			if ( ! empty( $pre_results ) ) {
 				$array_merge( $results, $pre_results );
 			}
 			
-			// don't continue if the query length is less than three
+			// Don't continue if the query length is less than three.
 			if ( strlen( $args['s'] ) < 3 ) {
 				wp_die( 0 );
 			}
@@ -208,7 +209,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 				$results = array_merge( $results, $posts );
 			}
 			
-			// search for matching term archives
+			// Search for matching term archives.
 			$search = '%' . like_escape( $s ) . '%';
 			$terms = $wpdb->get_results( $wpdb->prepare( "SELECT t.term_id, t.name, tt.taxonomy
 				FROM $wpdb->terms t
@@ -230,7 +231,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 				}
 			}
 			
-			// allow results to be filtered one last time and attempt to sort them
+			// Allow results to be filtered one last time and attempt to sort them.
 			if ( ! empty( $results ) ) {
 				self::$s = $s;
 				$results = apply_filters( 'better_internal_link_search_results', $results, $args );
@@ -240,7 +241,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 				}
 			}
 			
-			// add shortcut results
+			// Add shortcut results.
 			$shortcuts = (array) self::get_shortcuts();
 			if ( ! empty( $shortcuts ) ) {
 				if ( array_key_exists( $s, $shortcuts ) ) {
@@ -261,7 +262,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 	}
 	
 	/**
-	 * Internal link shortcuts
+	 * Internal link shortcuts.
 	 *
 	 * A couple of basic shortcuts for easily linking to the home url and site
 	 * url. Also gives plugins the ability to add more shortcuts.
@@ -281,7 +282,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 		) );
 		
 		if ( ! empty( $shortcuts ) ) {
-			// sanitize the shortcuts a bit
+			// Sanitize the shortcuts a bit.
 			foreach( $shortcuts as $key => $shortcut ) {
 				if ( empty( $shortcut['title'] ) || empty( $shortcut['permalink'] ) ) {
 					unset( $shortcuts[ $key ] );
@@ -301,13 +302,13 @@ class Blazer_Six_Better_Internal_Link_Search {
 	}
 	
 	/**
-	 * Custom results sorter
+	 * Custom results sorter.
 	 * 
 	 * Attempts to return results in a more natural order. Titles that exactly
 	 * match a search query are returned first, followed by titles that begin
 	 * with the query. Remaining results are sorted alphabetically.
 	 *
-	 * TODO: Potentially remove articles (a, an, the) when doing matches.
+	 * @todo Potentially remove articles (a, an, the) when doing matches.
 	 *
 	 * @since 1.1
 	 */
@@ -329,7 +330,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 		$a_strpos = mb_strpos( $a_title, $s );
 		$b_strpos = mb_strpos( $b_title, $s );
 		if ( 0 === $a_strpos && 0 === $b_strpos ) {
-			// return the shorter title first
+			// Return the shorter title first.
 			return ( mb_strlen( $a_title ) < mb_strlen( $b_title ) ) ? -1 : 1;
 		} elseif ( 0 === $a_strpos ) {
 			return -1;
@@ -341,7 +342,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 	}
 	
 	/**
-	 * Javascript to automatically search for text selected in the editor
+	 * Javascript to automatically search for text selected in the editor.
 	 *
 	 * Inserts any text selected in the editor into the search field in the
 	 * "Insert/edit link" popup when the link button in the toolbar is
@@ -356,12 +357,12 @@ class Blazer_Six_Better_Internal_Link_Search {
 		jQuery(function($) {
 			$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 				if ( -1 != options.data.indexOf('action=wp-link-ajax') && -1 != options.data.indexOf('search=') ) {
-					// abort the request if it's just for resetting the river
+					// Abort the request if it's just for resetting the river.
 					if ( -1 != options.data.indexOf('better-internal-link-search-reset-river-flag') ) {
 						jqXHR.abort();
 					}
 					
-					// reset the search field to a single dash
+					// Reset the search field to a single dash.
 					if ( -1 != options.data.indexOf('search=-help') ) {
 						$('#search-field').val('-');
 					}
@@ -373,7 +374,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 					searchTerm = '-',
 					timeout;
 				
-				// don't mind me, just debouncing, yo
+				// Don't mind me, just debouncing, yo.
 				searchField.off('keyup').on('keyup.bils', function() {
 					var self = this
 						$self = $(this);
@@ -381,10 +382,10 @@ class Blazer_Six_Better_Internal_Link_Search {
 					clearTimeout(timeout);
 					timeout = setTimeout( function() {
 						if ( '-' == $self.val() || 0 === $self.val().indexOf('-help') ) {
-							// ugly hack to reset the river...
+							// Ugly hack to reset the river...
 							$self.val('better-internal-link-search-reset-river-flag');
 							wpLink.searchInternalLinks.apply( self );
-							// and then bypass the three character minimum requirement
+							// And then bypass the three character minimum requirement.
 							$self.val('-help');
 						}
 						
@@ -392,7 +393,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 					}, 500 );
 				});
 				
-				// determine what text is selected in the editor
+				// Determine what text is selected in the editor.
 				if ( 'undefined' != typeof tinyMCE && ( editor = tinyMCE.activeEditor ) && ! editor.isHidden() ) {
 					var a = editor.dom.getParent(editor.selection.getNode(), 'A');
 					if ( null == a ) {
@@ -409,7 +410,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 					}
 				}
 				
-				// strip any html to get a clean search term
+				// Strip any html to get a clean search term.
 				if ( -1 !== searchTerm.indexOf('<') ) {
 					searchTerm = searchTerm.replace(/(<[^>]+>)/ig,'');
 				}
@@ -430,7 +431,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 	}
 	
 	/**
-	 * Search modifier help
+	 * Search modifier help.
 	 *
 	 * Intercepts a request for '-help' and displays any modifiers that have
 	 * been added via the filter.
@@ -444,7 +445,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 		
 		$results = apply_filters( 'better_internal_link_search_modifier_help', array() );
 		if ( ! empty( $results ) && ! empty( $args['s'] ) && array_key_exists( $args['s'], $results ) ) {
-			// if the -help request has a search query, limit the returned results to that modifier
+			// If the -help request has a search query, limit the returned results to that modifier.
 			$results = array( $results[ $args['s'] ] );
 		}
 		

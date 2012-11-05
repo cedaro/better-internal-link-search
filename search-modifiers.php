@@ -28,7 +28,7 @@
 
 
 /**
- * Search modifier help
+ * Search modifier help.
  *
  * Hook into this filter to provide help documentation for any custom search
  * modifiers.
@@ -85,13 +85,13 @@ function bils_default_modifier_help( $results ) {
 
 
 /**
- * WordPress Codex Search
+ * Search the WordPress Codex.
  *
  * <code>-codex {query}</code>
  */
 add_filter( 'better_internal_link_search_modifier-codex', 'bils_wpcodex_search', 10, 2 );
 function bils_wpcodex_search( $results, $args ) {
-	// don't want to hit the api for queries less than three characters
+	// Don't want to hit the API for queries less than three characters.
 	if ( strlen( $args['s'] ) < 3 ) {
 		wp_die( 0 );
 	}
@@ -127,7 +127,7 @@ function bils_wpcodex_search( $results, $args ) {
 
 
 /**
- * GitHub Gists List
+ * List GitHub Gists from a particular user.
  *
  * <code>-gists (lists Gists from default user specified below)</code>
  * <code>-gists {username}</code>
@@ -161,19 +161,19 @@ function bils_gists_search( $results, $args ) {
 
 
 /**
- * GitHub Repo Search
+ * GitHub repo search.
  *
  * <code>-github {query}</code>
  */
 add_filter( 'better_internal_link_search_modifier-github', 'bils_github_search', 10, 2 );
 function bils_github_search( $results, $args ) {
-	// don't want to hit the api for queries less than three characters
+	// Don't want to hit the api for queries less than three characters.
 	if ( strlen( $args['s'] ) < 3 ) {
 		wp_die( 0 );
 	}
 	
 	$search_args = array(
-		'start_page' => ceil( ( $args['page'] * $args['per_page'] ) / 100 ) // returns 100 results per page
+		'start_page' => ceil( ( $args['page'] * $args['per_page'] ) / 100 ) // Returns 100 results per page.
 	);
 	
 	$request_uri = add_query_arg( $search_args, sprintf( 'https://api.github.com/legacy/repos/search/%s', $args['s'] ) );
@@ -204,7 +204,7 @@ function bils_github_search( $results, $args ) {
 
 
 /**
- * iTunes Search
+ * iTunes search.
  *
  * Limited iTunes searching. The API has a bunch of capabilities, so this
  * could be customized to add or extend functionality.
@@ -214,16 +214,16 @@ function bils_github_search( $results, $args ) {
  */
 add_filter( 'better_internal_link_search_modifier-itunes', 'bils_itunes_search', 10, 2 );
 function bils_itunes_search( $results, $args ) {
-	// don't want to hit the api for queries less than three characters
+	// Don't want to hit the api for queries less than three characters.
 	if ( strlen( $args['s'] ) < 3 ) {
 		wp_die( 0 );
 	}
 	
 	// iTunes doesn't support paging, so we'll request the smallest set of results necessary
-	// then extract the results we want after processing
+	// then extract the results we want after processing.
 	$itunes_per_page = $args['page'] * $args['per_page'];
 	
-	// map search argument to actual API entities
+	// Map search argument to actual API entities.
 	$api_entities = array(
 		'album' => 'album',
 		'artist' => 'musicArtist',
@@ -291,7 +291,7 @@ function bils_itunes_search( $results, $args ) {
 				$result['permalink'] = esc_url( $result['permalink'] );
 				$result['info'] = trim( esc_html( strip_tags( $result['info'] ) ) );
 				
-				// not very exact, but oh well
+				// Not very exact, but oh well.
 				if ( strlen( $result['title'] ) > 30 ) {
 					$result['info'] = substr( $result['info'], 0, 15 ) . '...';
 				}
@@ -310,7 +310,7 @@ function bils_itunes_search( $results, $args ) {
 
 
 /**
- * WordPress Plugin Search
+ * WordPress plugin search.
  *
  * Search the WordPress plugin repository.
  *
@@ -318,7 +318,7 @@ function bils_itunes_search( $results, $args ) {
  */
 add_filter( 'better_internal_link_search_modifier-plugins', 'bils_wpplugins_search', 10, 2 );
 function bils_wpplugins_search( $results, $args ) {
-	// don't want to hit the api for queries less than three characters
+	// Don't want to hit the api for queries less than three characters.
 	if ( strlen( $args['s'] ) < 3 ) {
 		wp_die( 0 );
 	}
@@ -350,15 +350,15 @@ function bils_wpplugins_search( $results, $args ) {
 
 
 /**
- * Spotify Search
+ * Spotify search.
  *
  * <code>-spotify {query}</code>
  * <code>-spotify:{entity} {query}</code> (entities: album, artist, track)
  */
 add_filter( 'better_internal_link_search_modifier-spotify', 'bils_spotify_search', 10, 2 );
 function bils_spotify_search( $results, $args ) {
-	// Spotify doesn't support paged requests, so if page arg is greater than one, abort
-	// we also don't want to hit the api for queries less than three characters
+	// Spotify doesn't support paged requests, so if page arg is greater than one, abort.
+	// We also don't want to hit the API for queries less than three characters.
 	if ( intval( $args['page'] ) > 1 || strlen( $args['s'] ) < 3 ) {
 		wp_die( 0 );
 	}
@@ -400,7 +400,7 @@ function bils_spotify_search( $results, $args ) {
 
 
 /**
- * Search for a user
+ * Search for a user.
  *
  * Returns the user's archive link.
  *
@@ -463,13 +463,13 @@ function bils_user_search( $results, $args ) {
 
 
 /**
- * Wikipedia Search
+ * Wikipedia search.
  *
  * <code>-wikipedia {query}</code>
  */
 add_filter( 'better_internal_link_search_modifier-wikipedia', 'bils_wikipedia_search', 10, 2 );
 function bils_wikipedia_search( $results, $args ) {
-	// don't want to hit the api for queries less than three characters
+	// Don't want to hit the api for queries less than three characters.
 	if ( strlen( $args['s'] ) < 3 ) {
 		wp_die( 0 );
 	}
