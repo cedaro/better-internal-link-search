@@ -125,7 +125,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 		?>
 		<input type="checkbox" name="better_internal_link_search[automatically_search_selection]" id="better-internal-link-search-automatically-search-selection" value="yes"<?php checked( $settings['automatically_search_selection'], 'yes' ); ?>>
 		<label for="better-internal-link-search-automatically-search-selection"><?php _e( 'Automatically search for text selected in the editor?', 'better-internal-link-search' ); ?></label>
-		<br><span class="description">May cause a slight delay on sites with a lot of content.</span>
+		<br><span class="description"><?php _e( 'May cause a slight delay on sites with a lot of content.', 'better-internal-link-search' ); ?></span>
 		<?php
 	}
 	
