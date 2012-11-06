@@ -2,7 +2,7 @@
 /*
 Plugin Name: Better Internal Link Search
 Plugin URI: http://wordpress.org/extend/plugins/better-internal-link-search/
-Version: 1.1.1
+Version: 1.1.2
 Description: Improve the internal link popup functionality with time saving enhancements and features.
 Author: Blazer Six, Inc.
 Author URI: http://www.blazersix.com/
@@ -55,6 +55,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 		}
 		
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
+		add_action( 'admin_init', array( __CLASS__, 'register_settings' ) );
 		add_action( 'admin_footer-post.php', array( __CLASS__, 'admin_footer' ) );
 		add_action( 'admin_footer-post-new.php', array( __CLASS__, 'admin_footer' ) );
 	}
@@ -87,6 +88,45 @@ class Blazer_Six_Better_Internal_Link_Search {
 				add_action( 'pre_get_posts', array( __CLASS__, 'set_query_vars' ) );
 			}
 		}
+	}
+	
+	/**
+	 * Register plugin settings.
+	 * 
+	 * Adds a setting to enable the text selected in the editor to be searched
+	 * automatically. This was the default behavior in versions prior to
+	 * version 1.1.2, but it can cause a delay on large sites.
+	 * 
+	 * @since 1.1.2
+	 */
+	public static function register_settings() {
+		register_setting( 'writing', 'better_internal_link_search' );
+		
+		add_settings_section( 'better-internal-link-search', __( 'Internal Linking', 'better-internal-link-search' ), '__return_null', 'writing' );
+
+		add_settings_field(
+			'extensions',
+			__( 'Automatic Search', 'better-internal-link-search' ),
+			array( __CLASS__, 'automatic_internal_link_search_field' ),
+			'writing',
+			'better-internal-link-search'
+		);
+	}
+	
+	/**
+	 * Automatic search setting field.
+	 * 
+	 * @since 1.1.2
+	 */
+	public static function automatic_internal_link_search_field() {
+		$settings = wp_parse_args( get_option( 'better_internal_link_search' ), array(
+			'automatically_search_selection' => 'no'
+		) );
+		?>
+		<input type="checkbox" name="better_internal_link_search[automatically_search_selection]" id="better-internal-link-search-automatically-search-selection" value="yes"<?php checked( $settings['automatically_search_selection'], 'yes' ); ?>>
+		<label for="better-internal-link-search-automatically-search-selection"><?php _e( 'Automatically search for text selected in the editor?', 'better-internal-link-search' ); ?></label>
+		<br><span class="description">May cause a slight delay on sites with a lot of content.</span>
+		<?php
 	}
 	
 	/**
@@ -352,8 +392,14 @@ class Blazer_Six_Better_Internal_Link_Search {
 	 * @since 1.0
 	 */
 	public static function admin_footer() {
+		$settings = wp_parse_args( get_option( 'better_internal_link_search' ), array(
+			'automatically_search_selection' => 'no'
+		) );
 		?>
 		<script type="text/javascript">
+		// Output a settings object.
+		var BILSSettings = <?php echo json_encode( $settings ); ?>;
+		
 		jQuery(function($) {
 			$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 				if ( -1 != options.data.indexOf('action=wp-link-ajax') && -1 != options.data.indexOf('search=') ) {
@@ -415,7 +461,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 					searchTerm = searchTerm.replace(/(<[^>]+>)/ig,'');
 				}
 				
-				if ( searchTerm.length ) {
+				if ( 'yes' == BILSSettings.automatically_search_selection && searchTerm.length ) {
 					searchField.val( $.trim(searchTerm) ).keyup();
 				}
 			});

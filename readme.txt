@@ -3,7 +3,7 @@ Contributors: blazersix, bradyvercher
 Tags: links, internal links, search, editor, nav menus
 Requires at least: 3.4
 Tested up to: 3.4.1
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Beyond those simple changes are more powerful features that can be customized fo
 * Search by post or page title when adding links to the editor or adding pages to a nav menu.
 * Includes terms from any taxonomy in the search results so you can easily link to term archives.
 * Scheduled posts are included in search results.
-* Text highlighted in the editor when opening the internal link popup is searched for automatically.
+* Text highlighted in the editor when opening the internal link popup is searched for automatically (must be enabled on the Writing Settings screen).
 * Adds a shortcut for quickly linking to the homepage. Just type 'home'.
 * Provides the ability to create custom shortcuts with a little code.
 * Powerful modifiers included for searching additional data sources to make linking fast and easy (Wikipedia, GitHub, iTunes, Spotify, Codex).
@@ -64,8 +64,12 @@ Type `-` or `-help` in the search field and the search modifiers will be listed 
 
 == Changelog ==
 
+= 1.1.2=
+* Fixed a bug that didn't allow builtin search modifiers to be disabled.
+* Disabled the default behavior to search for text selected in the editor automatically to prevent a delay on sites with a lot of content. Added an option on the Writing Settings screen to re-enable it.
+
 = 1.1.1 =
-* Fixed bug preventing link popup from opening in HTML mode
+* Fixed bug preventing link popup from opening in HTML mode.
 
 = 1.1 =
 * Include term archives in results.

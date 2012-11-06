@@ -11,7 +11,7 @@ Beyond those simple changes are more powerful features that can be customized fo
 * Search by post or page title when adding links to the editor or adding pages to a nav menu.
 * Includes terms from any taxonomy in the search results so you can easily link to term archives.
 * Scheduled posts are included in search results.
-* Text highlighted in the editor when opening the internal link popup is searched for automatically.
+* Text highlighted in the editor when opening the internal link popup is searched for automatically (must be enabled on the Writing Settings screen).
 * Adds a shortcut for quickly linking to the homepage. Just type 'home'.
 * Provides the ability to create custom shortcuts with a little code.
 * Powerful modifiers included for searching additional data sources to make linking fast and easy (Wikipedia, GitHub, iTunes, Spotify, Codex).
