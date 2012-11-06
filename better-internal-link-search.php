@@ -48,6 +48,9 @@ class Blazer_Six_Better_Internal_Link_Search {
 	 * @since 1.0
 	 */
 	public static function load() {
+		add_action( 'admin_init', array( __CLASS__, 'upgrade' ) );
+		add_action( 'admin_init', array( __CLASS__, 'register_settings' ) );
+		
 		if ( isset( $_POST['search'] ) ) {
 			remove_action( 'wp_ajax_wp-link-ajax', 'wp_link_ajax', 1 );
 			add_action( 'wp_ajax_wp-link-ajax', array( __CLASS__, 'ajax_get_link_search_results' ), 1 );
@@ -55,7 +58,6 @@ class Blazer_Six_Better_Internal_Link_Search {
 		}
 		
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
-		add_action( 'admin_init', array( __CLASS__, 'register_settings' ) );
 		add_action( 'admin_footer-post.php', array( __CLASS__, 'admin_footer' ) );
 		add_action( 'admin_footer-post-new.php', array( __CLASS__, 'admin_footer' ) );
 	}
@@ -119,9 +121,7 @@ class Blazer_Six_Better_Internal_Link_Search {
 	 * @since 1.1.2
 	 */
 	public static function automatic_internal_link_search_field() {
-		$settings = wp_parse_args( get_option( 'better_internal_link_search' ), array(
-			'automatically_search_selection' => 'no'
-		) );
+		$settings = self::get_settings();
 		?>
 		<input type="checkbox" name="better_internal_link_search[automatically_search_selection]" id="better-internal-link-search-automatically-search-selection" value="yes"<?php checked( $settings['automatically_search_selection'], 'yes' ); ?>>
 		<label for="better-internal-link-search-automatically-search-selection"><?php _e( 'Automatically search for text selected in the editor?', 'better-internal-link-search' ); ?></label>
@@ -392,13 +392,10 @@ class Blazer_Six_Better_Internal_Link_Search {
 	 * @since 1.0
 	 */
 	public static function admin_footer() {
-		$settings = wp_parse_args( get_option( 'better_internal_link_search' ), array(
-			'automatically_search_selection' => 'no'
-		) );
 		?>
 		<script type="text/javascript">
 		// Output a settings object.
-		var BILSSettings = <?php echo json_encode( $settings ); ?>;
+		var BILSSettings = <?php echo json_encode( self::get_settings() ); ?>;
 		
 		jQuery(function($) {
 			$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
@@ -496,6 +493,42 @@ class Blazer_Six_Better_Internal_Link_Search {
 		}
 		
 		return $results;
+	}
+	
+	/**
+	 * Retrieve the plugin settings.
+	 * 
+	 * @since 1.1.2
+	 */
+	public static function get_settings() {
+		$settings = wp_parse_args( (array) get_option( 'better_internal_link_search' ), array(
+			'automatically_search_selection' => 'no'
+		) );
+		
+		return $settings;
+	}
+	
+	/**
+	 * Upgrade plugin settings.
+	 * 
+	 * The plugin version is saved as a different option so that updates to
+	 * the settings option don't stomp on it.
+	 * 
+	 * @since 1.1.2
+	 */
+	public static function upgrade() {
+		$saved_version = get_option( 'better_internal_link_search_version' );
+		
+		// If the plugin version setting isn't set or if it's below 1.1.2, add default settings and update the saved version.
+		if ( ! $saved_version || version_compare( $saved_version, '1.1.2', '<' ) ) {
+			$plugin_data = get_plugin_data( __FILE__ );
+			
+			// Add default settings.
+			update_option( 'better_internal_link_search', array( 'automatically_search_selection' => 'yes' ) );
+			
+			// Update saved version number.
+			update_option( 'better_internal_link_search_version', $plugin_data['Version'] );
+		}
 	}
 }
 ?>
