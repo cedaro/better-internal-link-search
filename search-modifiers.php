@@ -58,6 +58,11 @@ function bils_default_modifier_help( $results ) {
 			'permalink' => 'http://www.apple.com/itunes/',
 			'info' => 'iTunes'
 		),
+		'media' => array(
+			'title' => '<strong>-media {query}</strong></span><span class="item-description">Search for media attachments in your local WordPress installation. The URL returned will link directly to the file.</span>',
+			'permalink' => home_url( '/' ),
+			'info' => 'Local'
+		),
 		'plugins' => array(
 			'title' => '<strong>-plugins {query}</strong></span><span class="item-description">Search the WordPress plugin directory.</span>',
 			'permalink' => 'http://wordpress.org/extend/plugins/',
@@ -508,55 +513,34 @@ function bils_wikipedia_search( $results, $args ) {
 
 
 /**
- * Search for a media.
- *
- * Returns media from the media libary.
+ * Search for an attachment.
  *
  * Will produce the raw link to the media (not the permalink).
  *
  * <code>-media {filename}</code>
  *
- * By: Erik Larsson (ordinarycoder.com) @e_larsson
+ * @author Erik Larsson (ordinarycoder.com) @e_larsson
  */
 add_filter( 'better_internal_link_search_modifier-media', 'bils_media_search', 10, 2 );
 function bils_media_search( $results, $args ) {
-	$arg1 = ( isset( $args['modifier'][1] ) && ! empty( $args['modifier'][1] ) ) ? $args['modifier'][1] : null;
-	$arg2 = ( isset( $args['modifier'][2] ) && ! empty( $args['modifier'][2] ) ) ? $args['modifier'][2] : null;
-
-	
-	$search_args_media = array(
+	$search_args = array(
 		'post_status' => 'any',
 		'post_type' => 'attachment',
 		'paged' => $args['page'],
 		'posts_per_page' => $args['per_page'],
 		's' => $args['s']
-	);
+	);	
 	
-	
-	$query = new WP_Query();
-	$query->query( $search_args_media );
-	while ( $query->have_posts() ) : $query->the_post(); 
-		global $post;
-		
-		$mime = explode( '/', $post->post_mime_type );
-		
-		$media_type = get_post_mime_type( $post->ID );
-		if( $mime[0] == 'image' ) {
-			$media_type =  _('image');
+	$posts = get_posts( $search_args );
+	if ( $posts ) {
+		foreach ( $posts as $post ) {
+			$results[] = array(
+				'title' => get_the_title( $post->ID ),
+				'permalink' => wp_get_attachment_url( $post->ID ),
+				'info' => get_post_mime_type( $post->ID )
+			);
 		}
-		if( $mime[0] == 'application' ) {
-			$media_type = 'PDF';
-		}
-				
-		$result = array(
-			'title' => get_the_title(),
-			'permalink' => $post->guid,
-			'info' => 'Media ('. $media_type . ')'
-		);
-		
-		$results[] = $result;
-
-	endwhile; 
+	}
 
 	return $results;
 }

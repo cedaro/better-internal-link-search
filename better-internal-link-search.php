@@ -146,9 +146,12 @@ class Blazer_Six_Better_Internal_Link_Search {
 				$query->set( 'post_status', $post_status );
 			}
 			
-			// Paging won't work with multiple data sources and ideally the search term
-			// should be unique enough that there aren't a ton of matches.
-			$query->set( 'posts_per_page', -1 );
+			// Make sure 'posts_per_page' hasn't been explicitly set by a modifier to allow for paging of local results before overriding it.
+			if ( ! $query->get( 'posts_per_page' ) ) {
+				// Paging won't work with multiple data sources and ideally the search term
+				// should be unique enough that there aren't a ton of matches.
+				$query->set( 'posts_per_page', -1 );
+			}
 		}
 	}
 	
@@ -227,6 +230,11 @@ class Blazer_Six_Better_Internal_Link_Search {
 			$pre_results = (array) apply_filters( 'pre_better_internal_link_search_results', array(), $args );
 			if ( ! empty( $pre_results ) ) {
 				$array_merge( $results, $pre_results );
+			}
+			
+			// Short-circuit if this is a paged request. The first request should have returned all results.
+			if ( isset( $_POST['page'] ) && $_POST['page'] > 1 ) {
+				wp_die( 0 );
 			}
 			
 			// Don't continue if the query length is less than three.

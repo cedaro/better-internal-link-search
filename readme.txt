@@ -64,6 +64,10 @@ Type `-` or `-help` in the search field and the search modifiers will be listed 
 
 == Changelog ==
 
+= 1.1.3 =
+* Fixed a bug with paging for local search modifiers.
+* Added "-media" search modifier by Erik Larsson (Twitter: @e_larsson).
+
 = 1.1.2=
 * Fixed a bug that didn't allow builtin search modifiers to be disabled.
 * Added an option on the Writing Settings screen to disable the automatic searching of text selected in the editor when the Internal Linking popup is activated, so that it doesn't cause a delay on sites with a lot of content.
