@@ -505,4 +505,59 @@ function bils_wikipedia_search( $results, $args ) {
 	
 	return $results;
 }
+
+
+/**
+ * Search for a media.
+ *
+ * Returns media from the media libary.
+ *
+ * Will produce the raw link to the media (not the permalink).
+ *
+ * <code>-media {filename}</code>
+ *
+ * By: Erik Larsson (ordinarycoder.com) @e_larsson
+ */
+add_filter( 'better_internal_link_search_modifier-media', 'bils_media_search', 10, 2 );
+function bils_media_search( $results, $args ) {
+	$arg1 = ( isset( $args['modifier'][1] ) && ! empty( $args['modifier'][1] ) ) ? $args['modifier'][1] : null;
+	$arg2 = ( isset( $args['modifier'][2] ) && ! empty( $args['modifier'][2] ) ) ? $args['modifier'][2] : null;
+
+	
+	$search_args_media = array(
+		'post_status' => 'any',
+		'post_type' => 'attachment',
+		'paged' => $args['page'],
+		'posts_per_page' => $args['per_page'],
+		's' => $args['s']
+	);
+	
+	
+	$query = new WP_Query();
+	$query->query( $search_args_media );
+	while ( $query->have_posts() ) : $query->the_post(); 
+		global $post;
+		
+		$mime = explode( '/', $post->post_mime_type );
+		
+		$media_type = get_post_mime_type( $post->ID );
+		if( $mime[0] == 'image' ) {
+			$media_type =  _('image');
+		}
+		if( $mime[0] == 'application' ) {
+			$media_type = 'PDF';
+		}
+				
+		$result = array(
+			'title' => get_the_title(),
+			'permalink' => $post->guid,
+			'info' => 'Media ('. $media_type . ')'
+		);
+		
+		$results[] = $result;
+
+	endwhile; 
+
+	return $results;
+}
 ?>
