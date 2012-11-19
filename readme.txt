@@ -2,8 +2,8 @@
 Contributors: blazersix, bradyvercher
 Tags: links, internal links, search, editor, nav menus
 Requires at least: 3.4
-Tested up to: 3.4.2
-Stable tag: 1.1.2
+Tested up to: 3.5
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,12 +17,6 @@ The most basic feature limits results to posts and pages that contain your searc
 
 Beyond those simple changes are more powerful features that can be customized for your particular site, including creating shortcuts and even searching external sites without leaving WordPress!
 
-= What's New? =
-
-= Instant Search =
-
-Instantly see search results for pages, posts, media items or other custom post types on their Manage Posts screens. As soon as you start typing in the search field, the table instantly updates with results for whichever post type you're viewing. Pressing enter or clicking the search button will continue to return posts using the default search algorithm (post titles and content).
-
 = Features =
 
 * Search by post or page title when adding links to the editor or adding pages to a nav menu.
@@ -33,6 +27,10 @@ Instantly see search results for pages, posts, media items or other custom post 
 * Provides the ability to create custom shortcuts with a little code.
 * Powerful modifiers included for searching additional data sources to make linking fast and easy (Wikipedia, GitHub, iTunes, Spotify, Codex).
 * Extendable so developers can add their own sources.
+
+= Instant Search (New!) =
+
+Instantly see search results for pages, posts, media items or other custom post types on their Manage Posts screens. As soon as you start typing in the search field, the table instantly updates with results for whichever post type you're viewing. Pressing enter or clicking the search button will continue to return posts using the default search algorithm (post titles and content).
 
 = Shortcuts =
 
@@ -71,7 +69,7 @@ Type `-` or `-help` in the search field and the search modifiers will be listed 
 == Changelog ==
 
 = 1.2 =
-* Added instant search on Manage Posts screens.
+* Added instant search on Manage Posts/Media screens.
 * Reorganized the plugin structure.
 * Fixed a bug with paging for local search modifiers.
 * Added "-media" search modifier by Erik Larsson (Twitter: @e_larsson).

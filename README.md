@@ -6,12 +6,6 @@ The most basic feature limits results to posts and pages that contain your searc
 
 Beyond those simple changes are more powerful features that can be customized for your particular site, including creating shortcuts and even searching external sites without leaving WordPress!
 
-## What's New? ##
-
-### Instant Search ###
-
-Instantly see search results for pages, posts, media items or other custom post types on their Manage Posts screens. As soon as you start typing in the search field, the table instantly updates with results for whichever post type you're viewing. Pressing enter or clicking the search button will continue to return posts using the default search algorithm (post titles and content).
-
 ## Improvements and Features ##
 
 * Search by post or page title when adding links to the editor or adding pages to a nav menu.
@@ -22,6 +16,10 @@ Instantly see search results for pages, posts, media items or other custom post 
 * Provides the ability to create custom shortcuts with a little code.
 * Powerful modifiers included for searching additional data sources to make linking fast and easy (Wikipedia, GitHub, iTunes, Spotify, Codex).
 * Extendable so developers can add their own sources.
+
+## Instant Search (New!) ##
+
+Instantly see search results for pages, posts, media items or other custom post types on their Manage Posts screens. As soon as you start typing in the search field, the table instantly updates with results for whichever post type you're viewing. Pressing enter or clicking the search button will continue to return posts using the default search algorithm (post titles and content).
 
 ## Shortcuts ##
 

@@ -27,8 +27,6 @@
  * @author Brady Vercher <brady@blazersix.com>
  * @copyright Copyright (c) 2012, Blazer Six, Inc.
  * @license http://www.gnu.org/licenses/gpl-2.0.html
- *
- * @todo Test in 3.5
  */
 
 /**

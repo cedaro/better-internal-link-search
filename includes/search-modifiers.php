@@ -24,6 +24,8 @@
  * Snippets included for searching the WordPress Codex, WordPress plugin
  * respository, GitHub Repositories, iTunes, Spotify, WikiPedia, listing a
  * user's Gists, or returning various user links (archive URL, website, etc).
+ *
+ * @package Better_Internal_Link_Search
  */
 
 
