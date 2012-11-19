@@ -88,7 +88,6 @@ function bils_default_modifier_help( $results ) {
 	return array_merge( (array) $results, $modifiers );	
 }
 
-
 /**
  * Search the WordPress Codex.
  *
@@ -130,7 +129,6 @@ function bils_wpcodex_search( $results, $args ) {
 	return $results;
 }
 
-
 /**
  * List GitHub Gists from a particular user.
  *
@@ -163,7 +161,6 @@ function bils_gists_search( $results, $args ) {
 	
 	return $results;
 }
-
 
 /**
  * GitHub repo search.
@@ -206,7 +203,6 @@ function bils_github_search( $results, $args ) {
 		
 	return $results;
 }
-
 
 /**
  * iTunes search.
@@ -313,7 +309,6 @@ function bils_itunes_search( $results, $args ) {
 	return $results;
 }
 
-
 /**
  * WordPress plugin search.
  *
@@ -352,7 +347,6 @@ function bils_wpplugins_search( $results, $args ) {
 	
 	return $results;
 }
-
 
 /**
  * Spotify search.
@@ -402,7 +396,6 @@ function bils_spotify_search( $results, $args ) {
 	
 	return $results;
 }
-
 
 /**
  * Search for a user.
@@ -466,7 +459,6 @@ function bils_user_search( $results, $args ) {
 	return $results;
 }
 
-
 /**
  * Wikipedia search.
  *
@@ -511,7 +503,6 @@ function bils_wikipedia_search( $results, $args ) {
 	return $results;
 }
 
-
 /**
  * Search for an attachment.
  *
@@ -519,7 +510,7 @@ function bils_wikipedia_search( $results, $args ) {
  *
  * <code>-media {filename}</code>
  *
- * @author Erik Larsson (ordinarycoder.com) @e_larsson
+ * @author Erik Larsson (ordinarycoder.com; twitter.com/e_larsson)
  */
 add_filter( 'better_internal_link_search_modifier-media', 'bils_media_search', 10, 2 );
 function bils_media_search( $results, $args ) {

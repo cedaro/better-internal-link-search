@@ -17,6 +17,10 @@ Beyond those simple changes are more powerful features that can be customized fo
 * Powerful modifiers included for searching additional data sources to make linking fast and easy (Wikipedia, GitHub, iTunes, Spotify, Codex).
 * Extendable so developers can add their own sources.
 
+### Instant Search (New!) ###
+
+On Manage Posts screens, typing in the search field will filter the list of posts instantly, making it much quicker to find a matching post, page, or other custom post type. Pressing enter or clicking the search button will continue to return posts using the default search algorithm (post titles and content).
+
 ## Shortcuts ##
 
 Type `home` or `siteurl` in the search field and quickly get links to those locations.  Additional shortcuts can be added with a little bit of code in your functions.php, so if you find yourself linking to a particular URL over and over again, add a shortcut and save yourself some time!
