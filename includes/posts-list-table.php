@@ -24,6 +24,7 @@ class Better_Internal_Link_Search_Posts_List_Table {
 	public static function init() {
 		add_action( 'wp_ajax_bils_get_posts_list_table', array( __CLASS__, 'ajax_get_posts_list_table' ) );
 		add_action( 'admin_head-edit.php', array( __CLASS__, 'admin_head_edit' ) );
+		add_action( 'admin_head-upload.php', array( __CLASS__, 'admin_head_edit' ) );
 	}
 	
 	/**
@@ -39,7 +40,7 @@ class Better_Internal_Link_Search_Posts_List_Table {
 		wp_enqueue_script( 'bils-posts-list-table', BETTER_INTERNAL_LINK_SEARCH_URL . 'js/posts-list-table.js', array( 'jquery' ) );
 		wp_localize_script( 'bils-posts-list-table', 'BilsListTable', array(
 			'nonce'          => wp_create_nonce( 'bils-posts-list-table-instant-search' ),
-			'postType'       => $screen->post_type,
+			'postType'       => ( 'upload' == $screen->id ) ? 'attachment' : $screen->post_type,
 			'screen'         => $screen->id,
 			'spinner'        => self::spinner( array( 'echo' => false ) ),
 			'subtitlePrefix' => __( 'Search results for &#8220;%s&#8221;', 'better-internal-link-search-i18n' )
@@ -76,14 +77,14 @@ class Better_Internal_Link_Search_Posts_List_Table {
 		if ( isset( $_REQUEST['orderby'] ) && ! empty( $_REQUEST['orderby'] ) ) {
 			$orderby = $_REQUEST['orderby'];
 		} else {
-			$order = ( $post_type_object->heirarchical ) ? 'title' : 'post_date';
+			$orderby = ( $post_type_object->hierarchical ) ? 'title' : 'post_date';
 		}
 		
 		// Determine the order argument.
 		if ( isset( $_REQUEST['order'] ) && ! empty( $_REQUEST['order'] ) ) {
 			$order = ( 'asc' == strtolower( $_REQUEST['order'] ) ) ? 'asc' : 'desc';
 		} else {
-			$order = ( $post_type_object->heirarchical ) ? 'asc' : 'desc';
+			$order = ( $post_type_object->hierarchical ) ? 'asc' : 'desc';
 		}
 		
 		$args = array(
@@ -96,13 +97,23 @@ class Better_Internal_Link_Search_Posts_List_Table {
 			'suppress_filters' => true
 		);
 		
+		if ( 'attachment' == $post_type ) {
+			$args['post_status'] = 'inherit';
+			$args['post_mime_type'] = $_REQUEST['post_mime_type'];
+		}
+		
 		set_current_screen( $_REQUEST['screen'] );
 		
 		add_filter( 'posts_search', array( 'Better_Internal_Link_Search', 'limit_search_to_title' ), 10, 2 );
 		
 		$wp_query = new WP_Query( $args );
 		
-		$wp_list_table = _get_list_table( 'WP_Posts_List_Table' );
+		if ( 'attachment' == $post_type ) {
+			$wp_list_table = _get_list_table( 'WP_Media_List_Table' );
+		} else {
+			$wp_list_table = _get_list_table( 'WP_Posts_List_Table' );
+		}
+		
 		$wp_list_table->prepare_items();
 		$wp_list_table->display_rows_or_placeholder();
 		

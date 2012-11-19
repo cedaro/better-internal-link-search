@@ -48,8 +48,7 @@ class Better_Internal_Link_Search_Settings {
 		$settings = self::get_settings();
 		?>
 		<input type="checkbox" name="better_internal_link_search[automatically_search_selection]" id="better-internal-link-search-automatically-search-selection" value="yes"<?php checked( $settings['automatically_search_selection'], 'yes' ); ?>>
-		<label for="better-internal-link-search-automatically-search-selection"><?php _e( 'Automatically search for text selected in the editor?', 'better-internal-link-search-i18n' ); ?></label>
-		<br><span class="description"><?php _e( 'May cause a slight delay on sites with a lot of content.', 'better-internal-link-search-i18n' ); ?></span>
+		<label for="better-internal-link-search-automatically-search-selection"><?php _e( 'Automatically search for text selected in the editor when opening the internal link manager?', 'better-internal-link-search-i18n' ); ?></label>
 		<?php
 	}
 	

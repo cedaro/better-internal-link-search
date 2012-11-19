@@ -1,8 +1,9 @@
 jQuery(function($) {
 	var $postFilters = $('#posts-filter'),
-		$searchField = $('#post-search-input'),
+		$pagesNav = $postFilters.find('.tablenav-pages'),
+		$searchField = $('#post-search-input, #media-search-input'),
 		$searchStatus = $( '<table><tr class="no-items"><td class="colspanchange">' + BilsListTable.spinner + '</td></tr></table>' ),
-		$spinner = $('#post-search-input').before( BilsListTable.spinner ).siblings('.spinner'),
+		$spinner = $searchField.before( BilsListTable.spinner ).siblings('.spinner'),
 		$theList = $('#the-list'),
 		$title = $('#wpbody h2:eq(0)'),
 		$subtitle = $title.find('.subtitle'),
@@ -24,15 +25,16 @@ jQuery(function($) {
 	
 	// Construct an object of args to send via AJAX.
 	requestArgs = {
-		action:      'bils_get_posts_list_table',
-		post_status: $postFilters.find('input.post_status_page').val(),
-		post_type:   BilsListTable.postType,
-		orderby:     $postFilters.find('input[name="orderby"]').val() || null,
-		order:       $postFilters.find('input[name="order"]').val() || null,
-		screen:      BilsListTable.screen,
-		mode:        $postFilters.find('input[name="mode"]').val(),
-		nonce:       BilsListTable.nonce,
-		uid:         userSettings.uid // For determining hidden columns.
+		action:         'bils_get_posts_list_table',
+		mode:           $postFilters.find('input[name="mode"]').val() || null,
+		nonce:          BilsListTable.nonce,
+		order:          $postFilters.find('input[name="order"]').val() || null,
+		orderby:        $postFilters.find('input[name="orderby"]').val() || null,
+		post_mime_type: $postFilters.find('input[name="post_mime_type"]').val() || null,
+		post_status:    $postFilters.find('input.post_status_page').val() || null,
+		post_type:      BilsListTable.postType,
+		screen:         BilsListTable.screen,
+		uid:            userSettings.uid // For determining hidden columns.
 	};
 	
 	searchPosts = function() {
@@ -46,12 +48,14 @@ jQuery(function($) {
 				$subtitle.hide();
 			}
 			
+			$pagesNav.show();
 			$theList.html( theListOriginal );
 			return;
 		}
 		
 		// Begin searching.
 		$spinner.show();
+		$pagesNav.hide();
 		$theList.html( $searchStatus.html() );
 		
 		requestArgs['s'] = $searchField.val();
