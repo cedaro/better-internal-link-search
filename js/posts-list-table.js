@@ -30,7 +30,7 @@ jQuery(function($) {
 		nonce:          BilsListTable.nonce,
 		order:          $postFilters.find('input[name="order"]').val() || null,
 		orderby:        $postFilters.find('input[name="orderby"]').val() || null,
-		post_mime_type: $postFilters.find('input[name="post_mime_type"]').val() || null,
+		post_mime_type: BilsListTable.postMimeType,
 		post_status:    $postFilters.find('input.post_status_page').val() || null,
 		post_type:      BilsListTable.postType,
 		screen:         BilsListTable.screen,
