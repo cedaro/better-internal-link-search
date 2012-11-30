@@ -58,6 +58,9 @@ Type `shortcuts` in the search field and all of your registered shortcuts will b
 = How do I know which modifiers are available? =
 Type `-` or `-help` in the search field and the search modifiers will be listed with their syntax and a brief description about what they do.
 
+= There's a slight delay when opening the internal link popup. Help? =
+If your site has a lot of content, the automatic search feature may cause it to lag as search results are retrieved. You can disable this feature by unchecking the "Automatic Search" field on the Writing settings screen in your dashboard (go to Settings->Writing).
+
 == Screenshots ==
 
 1. Standard search results. The "Contact Us" page is nowhere in sight and in fact, is about the 95th page in this particular list.
