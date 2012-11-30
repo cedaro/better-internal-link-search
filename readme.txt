@@ -7,15 +7,15 @@ Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Improve the internal link popup functionality with time saving enhancements and features.
+Improve the internal link popup manager with time-saving enhancements and features.
 
 == Description ==
 
 Better Internal Link Search improves the default internal link searching feature in a number of ways, making it faster and easier to find the content you want to link to.
 
-The most basic feature limits results to posts and pages that contain your search query in their titles, rather than returning every post that contains the query in the title *or content fields*--this greatly reduces the number of results on sites with a large amount of content and should improve accuracy. In addition, term archives are included in the results so you can more easily link to them.
+The most basic feature limits results to posts and pages that contain your search term in the title, rather than returning every post that contains the term in the title *or content field* -- this greatly reduces the number of results on sites with a lot of content and should improve accuracy.
 
-Beyond those simple changes are more powerful features that can be customized for your particular site, including creating shortcuts and even searching external sites without leaving WordPress!
+Beyond that simple change are more powerful features that can be customized for your particular site, including creating shortcuts for often-used links and even searching external sites without leaving WordPress!
 
 = Features =
 
@@ -67,6 +67,9 @@ Type `-` or `-help` in the search field and the search modifiers will be listed 
 5. A search modifier in action.
 
 == Changelog ==
+
+= 1.2.1 =
+* Fixed a bug with instant search in 3.5.
 
 = 1.2 =
 * Added instant search on Manage Posts/Media screens.

@@ -1,20 +1,20 @@
 # Better Internal Link Search #
 
-On WordPress sites with a large amount of content, searching for a particular post or page can be difficult because WordPress matches the title and content fields. Better Internal Link Search helps remedy that in addition to providing a number of other enhancements.
+Better Internal Link Search improves the default internal link searching feature in WordPress in a number of ways, making it faster and easier to find the content you want to link to.
 
-The most basic feature limits results to posts and pages that contain your search query in their titles, rather than returning every post that contains the query in the title *or content fields*--this greatly reduces the number of results on sites with a large amount of content and should improve accuracy. In addition, term archives are included in the results so you can more easily link to them.
+The most basic feature limits results to posts and pages that contain your search term in the title, rather than returning every post that contains the term in the title *or content field* -- this greatly reduces the number of results on sites with a lot of content and should improve accuracy.
 
-Beyond those simple changes are more powerful features that can be customized for your particular site, including creating shortcuts and even searching external sites without leaving WordPress!
+Beyond that simple change are more powerful features that can be customized for your particular site, including creating shortcuts for often-used links and even searching external sites without leaving WordPress!
 
 ## Improvements and Features ##
 
-* Search by post or page title when adding links to the editor or adding pages to a nav menu.
+* Search by title only when inserting links in the editor or adding pages to a nav menu.
 * Includes terms from any taxonomy in the search results so you can easily link to term archives.
 * Scheduled posts are included in search results.
-* Text highlighted in the editor when opening the internal link popup is searched for automatically.
+* Text highlighted in the editor when the internal link popup is opened is searched for automatically.
 * Adds a shortcut for quickly linking to the homepage. Just type 'home'.
 * Provides the ability to create custom shortcuts with a little code.
-* Powerful modifiers included for searching additional data sources to make linking fast and easy (Wikipedia, GitHub, iTunes, Spotify, Codex).
+* Powerful modifiers included for searching additional data sources to make linking fast and easy (media, authors, Wikipedia, GitHub, iTunes, Spotify, Codex).
 * Extendable so developers can add their own sources.
 
 ## Instant Search (New!) ##
@@ -23,7 +23,7 @@ Instantly see search results for pages, posts, media items or other custom post 
 
 ## Shortcuts ##
 
-Type `home` or `siteurl` in the search field and quickly get links to those locations.  Additional shortcuts can be added with a little bit of code in your functions.php, so if you find yourself linking to a particular URL over and over again, add a shortcut and save yourself some time!
+Type `home` or `siteurl` in the search field and quickly get links to those locations. Additional shortcuts can be added with a little bit of code in your functions.php, so if you find yourself linking to a particular URL over and over again, add a shortcut and save yourself some time!
 
 If you don't remember which shortcuts have been registered, type `shortcuts` to list them all.
 
