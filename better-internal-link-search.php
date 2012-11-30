@@ -320,9 +320,6 @@ class Better_Internal_Link_Search {
 		?>
 		<style type="text/css">
 		#wp-link .item-description { display: block; padding: 3px 0 0 10px;}
-		#wp-link .link-search-wrapper img.waiting { margin-top: 5px;}
-		#wp-link .link-search-wrapper input { float: left;}
-		#wp-link .link-search-wrapper span { margin-top: 0; padding-top: 5px; line-height: 15px;}
 		</style>
 		<?php
 	}

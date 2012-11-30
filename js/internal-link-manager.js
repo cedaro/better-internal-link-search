@@ -1,4 +1,7 @@
 jQuery(function($) {
+	var $searchField = $('#search-field').width(200),
+		timeout;
+
 	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 		if ( -1 != options.data.indexOf('action=wp-link-ajax') && -1 != options.data.indexOf('search=') ) {
 			// Abort the request if it's just for resetting the river.
@@ -12,14 +15,12 @@ jQuery(function($) {
 			}
 		}
 	});
-		
-	$('#wp-link').bind('wpdialogbeforeopen', function() {
-		var searchField = $('#search-field').width(200),
-			searchTerm = '-',
-			timeout;
+	
+	$('#wp-link').on('wpdialogbeforeopen', function() {
+		var searchTerm = '-';
 		
 		// Don't mind me, just debouncing, yo.
-		searchField.off('keyup').on('keyup.bils', function() {
+		$searchField.off('keyup').on('keyup.bils', function() {
 			var self = this
 				$self = $(this);
 			
@@ -60,7 +61,7 @@ jQuery(function($) {
 		}
 		
 		if ( 'yes' == BilsSettings.automatically_search_selection && searchTerm.length ) {
-			searchField.val( $.trim(searchTerm) ).keyup();
+			$searchField.val( $.trim(searchTerm) ).keyup();
 		}
 	});
 });

@@ -62,9 +62,10 @@ class Better_Internal_Link_Search_Posts_List_Table {
 	 * Mimics admin/edit.php without all the chrome elements.
 	 *
 	 * @since 1.2.0
+	 * @todo Account for private status on media items?
 	 */
 	public static function ajax_get_posts_list_table() {
-		global $post_type, $post_type_object, $per_page, $mode, $wp_query;
+		global $hook_suffix, $post_type, $post_type_object, $per_page, $mode, $wp_query;
 		
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'bils-posts-list-table-instant-search' ) ) {
 			echo '<tr class="no-items bils-error"><td class="colspanchange">Invalid nonce.</td></tr>';
