@@ -111,9 +111,9 @@ class Better_Internal_Link_Search_Posts_List_Table {
 		$wp_query = new WP_Query( $args );
 		
 		if ( 'attachment' == $post_type ) {
-			$wp_list_table = _get_list_table( 'WP_Media_List_Table' );
+			$wp_list_table = _get_list_table( 'WP_Media_List_Table', array( 'screen' => $_REQUEST['screen'] ) );
 		} else {
-			$wp_list_table = _get_list_table( 'WP_Posts_List_Table' );
+			$wp_list_table = _get_list_table( 'WP_Posts_List_Table', array( 'screen' => $_REQUEST['screen'] ) );
 		}
 		
 		$wp_list_table->prepare_items();
