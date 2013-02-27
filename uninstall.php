@@ -7,4 +7,3 @@ global $wpdb;
 
 delete_option( 'better_internal_link_search' );
 delete_option( 'better_internal_link_search_version' );
-?>

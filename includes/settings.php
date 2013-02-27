@@ -12,10 +12,10 @@ class Better_Internal_Link_Search_Settings {
 	 *
 	 * @since 1.2.0
 	 */
-	function load() {
+	public static function load() {
 		add_action( 'admin_init', array( __CLASS__, 'register_settings' ) );
 	}
-	
+
 	/**
 	 * Register plugin settings.
 	 *
@@ -27,7 +27,7 @@ class Better_Internal_Link_Search_Settings {
 	 */
 	public static function register_settings() {
 		register_setting( 'writing', 'better_internal_link_search' );
-		
+
 		add_settings_section( 'better-internal-link-search', __( 'Internal Linking', 'better-internal-link-search-i18n' ), '__return_null', 'writing' );
 
 		add_settings_field(
@@ -38,7 +38,7 @@ class Better_Internal_Link_Search_Settings {
 			'better-internal-link-search'
 		);
 	}
-	
+
 	/**
 	 * Automatic search setting field.
 	 *
@@ -51,7 +51,7 @@ class Better_Internal_Link_Search_Settings {
 		<label for="better-internal-link-search-automatically-search-selection"><?php _e( 'Automatically search for text selected in the editor when opening the internal link manager?', 'better-internal-link-search-i18n' ); ?></label>
 		<?php
 	}
-	
+
 	/**
 	 * Retrieve the plugin settings.
 	 *
@@ -61,8 +61,7 @@ class Better_Internal_Link_Search_Settings {
 		$settings = wp_parse_args( (array) get_option( 'better_internal_link_search' ), array(
 			'automatically_search_selection' => 'no'
 		) );
-		
+
 		return $settings;
 	}
 }
-?>
