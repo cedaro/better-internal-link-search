@@ -2,8 +2,8 @@
 Contributors: blazersix, bradyvercher
 Tags: links, internal links, search, editor, nav menus
 Requires at least: 3.4
-Tested up to: 3.5
-Stable tag: 1.2
+Tested up to: 3.6
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,7 +72,9 @@ If your site has a lot of content, the automatic search feature may cause it to 
 == Changelog ==
 
 = 1.2.1 =
-* Fixed a bug with instant search in 3.5.
+* Fixed a bug with instant search in WordPress 3.5.
+* Better compatibility with plugins that create custom columns, specifically Codepress Admin Columns.
+* Cleaned up code formatting and whitespace.
 
 = 1.2 =
 * Added instant search on Manage Posts/Media screens.

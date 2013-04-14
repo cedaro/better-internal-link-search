@@ -3,7 +3,7 @@
  * Plugin Name: Better Internal Link Search
  * Plugin URI: http://wordpress.org/extend/plugins/better-internal-link-search/
  * Description: Improve the internal link popup functionality with time saving enhancements and features.
- * Version: 1.2
+ * Version: 1.2.1
  * Author: Blazer Six, Inc.
  * Author URI: http://www.blazersix.com/
  * License: GPLv2 or later
