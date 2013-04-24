@@ -106,6 +106,9 @@ class Better_Internal_Link_Search_Posts_List_Table {
 
 		set_current_screen( $_REQUEST['screen'] );
 
+		// Posts 2 Posts column compatibility.
+		do_action( 'load-edit.php' );
+
 		add_filter( 'posts_search', array( 'Better_Internal_Link_Search', 'limit_search_to_title' ), 10, 2 );
 
 		$wp_query = new WP_Query( $args );
