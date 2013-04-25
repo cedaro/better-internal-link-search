@@ -73,7 +73,7 @@ jQuery(function($) {
 		});
 	};
 
-	$searchField.on('keypress.bils', function(e) {
+	$searchField.on('keydown.bils', function(e) {
 		var code = e.keyCode || e.which;
 
 		clearTimeout(timeout);
