@@ -72,8 +72,9 @@ If your site has a lot of content, the automatic search feature may cause it to 
 == Changelog ==
 
 = 1.2.2 =
-* Change keypress event for typeahead search results to work in Chrome.
-* Add an action to the typeahead AJAX callback so custom P2P columns display.
+* Changed keypress event for typeahead search results to work in Chrome.
+* Added an action to the typeahead AJAX callback so custom P2P columns display.
+* Added support for WordPress SEO custom columns.
 
 = 1.2.1 =
 * Fixed a bug with instant search in WordPress 3.5.

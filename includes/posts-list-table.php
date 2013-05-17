@@ -65,7 +65,7 @@ class Better_Internal_Link_Search_Posts_List_Table {
 	 * @todo Account for private status on media items?
 	 */
 	public static function ajax_get_posts_list_table() {
-		global $hook_suffix, $post_type, $post_type_object, $per_page, $mode, $wp_query;
+		global $hook_suffix, $pagenow, $post_type, $post_type_object, $per_page, $mode, $wp_query;
 
 		if ( ! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce( $_REQUEST['nonce'], 'bils-posts-list-table-instant-search' ) ) {
 			echo '<tr class="no-items bils-error"><td class="colspanchange">Invalid nonce.</td></tr>';
@@ -102,6 +102,17 @@ class Better_Internal_Link_Search_Posts_List_Table {
 		if ( 'attachment' == $post_type ) {
 			$args['post_status'] = 'inherit';
 			$args['post_mime_type'] = $_REQUEST['post_mime_type'];
+		}
+
+		// WordPress SEO compatibility.
+		if ( function_exists( 'wpseo_admin_init' ) ) {
+			$pagenow = 'edit.php';
+			wpseo_admin_init();
+
+			if ( class_exists( 'WPSEO_Metabox' ) ) {
+				$wpseo_metabox = new WPSEO_Metabox();
+				$wpseo_metabox->setup_page_analysis();
+			}
 		}
 
 		set_current_screen( $_REQUEST['screen'] );
