@@ -3,29 +3,15 @@
  * Plugin Name: Better Internal Link Search
  * Plugin URI: http://wordpress.org/extend/plugins/better-internal-link-search/
  * Description: Improve the internal link popup functionality with time saving enhancements and features.
- * Version: 1.2.1
- * Author: Blazer Six, Inc.
+ * Version: 1.2.2
+ * Author: Blazer Six
  * Author URI: http://www.blazersix.com/
- * License: GPLv2 or later
+ * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
- * more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc., 59
- * Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * @package Better_Internal_Link_Search
+ * @package BetterInternalLinkSearch
  * @author Brady Vercher <brady@blazersix.com>
- * @copyright Copyright (c) 2012, Blazer Six, Inc.
+ * @copyright Copyright (c) 2013, Blazer Six, Inc.
  * @license http://www.gnu.org/licenses/gpl-2.0.html
  */
 
@@ -72,7 +58,7 @@ class Better_Internal_Link_Search {
 			include( BETTER_INTERNAL_LINK_SEARCH_DIR . 'includes/settings.php' );
 			Better_Internal_Link_Search_Settings::load();
 
-			// Lost post list table instant search.
+			// Load post list table typeahead search.
 			include( BETTER_INTERNAL_LINK_SEARCH_DIR . 'includes/posts-list-table.php' );
 			Better_Internal_Link_Search_Posts_List_Table::load();
 
