@@ -32,19 +32,9 @@ Beyond that simple change are more powerful features that can be customized for 
 
 Instantly see search results for pages, posts, media items or other custom post types on their Manage Posts screens. As soon as you start typing in the search field, the table instantly updates with results for whichever post type you're viewing. Pressing enter or clicking the search button will continue to return posts using the default search algorithm (post titles and content).
 
-= Shortcuts =
+Here is an overview of the plugin's features recorded by Eric Amundson of [Ivy Cat](http://www.ivycat.com/).
 
-Type `home` or `siteurl` in the search field and quickly get links to those locations.  Additional shortcuts can be added with a little bit of code in your functions.php, so if you find yourself linking to a particular URL over and over again, add a shortcut and save yourself some time!
-
-= Search Modifiers =
-
-Search modifiers are the most powerful feature of Better Internal Link Search. Although they can be a bit more complex to use, they have the potential to save a lot of time when repeatedly linking to external websites. For example, searching for the term 'interrobang' on Wikipedia would look like this:
-
-`-wikipedia interrobang`
-
-A few simple modifiers have been included by default and should serve as examples for developers that want to create their own or change the syntax. Basic support is built in for Wikipedia, iTunes, Spotify, the WordPress plugin directory, the Codex, GitHub repositories, listing a user's GitHub Gists, and linking to author archive URLs.
-
-Type `-help` in the search field to view the available modifiers.
+http://www.youtube.com/watch?v=WfyTiVTdEX8
 
 == Installation ==
 
@@ -53,12 +43,18 @@ Installing Better Internal Link Search is just like installing most other plugin
 == Frequently Asked Questions ==
 
 = How do I know which shortcuts are available? =
-Type `shortcuts` in the search field and all of your registered shortcuts will be listed.
+Type `shortcuts` in the search field and all of your registered shortcuts will be listed. Additional shortcuts can be added with a little bit of code in your functions.php, so if you find yourself linking to a particular URL over and over again, add a shortcut and save yourself some time!
 
 = How do I know which modifiers are available? =
 Type `-` or `-help` in the search field and the search modifiers will be listed with their syntax and a brief description about what they do.
 
-= There's a slight delay when opening the internal link popup. Help? =
+Although they can be a bit more complex to use, they have the potential to save a lot of time when repeatedly linking to external websites. For example, searching for the term 'interrobang' on Wikipedia would look like this:
+
+`-wikipedia interrobang`
+
+A few simple modifiers have been included by default and should serve as examples for developers that want to create their own or change the syntax. Basic support is built in for Wikipedia, iTunes, Spotify, the WordPress plugin directory, the Codex, GitHub repositories, listing a user's GitHub Gists, and linking to author archive URLs.
+
+= There is a slight delay when opening the internal link popup. Help? =
 If your site has a lot of content, the automatic search feature may cause it to lag as search results are retrieved. You can disable this feature by unchecking the "Automatic Search" field on the Writing settings screen in your dashboard (go to Settings &rarr; Writing).
 
 == Screenshots ==
@@ -70,6 +66,10 @@ If your site has a lot of content, the automatic search feature may cause it to 
 5. A search modifier in action.
 
 == Changelog ==
+
+= 1.2.3 =
+* Add a check to prevent errors with plugins that don't use the WordPress AJAX API.
+* Update JavaScript to pass JSHint tests.
 
 = 1.2.2 =
 * Changed keypress event for typeahead search results to work in Chrome.
