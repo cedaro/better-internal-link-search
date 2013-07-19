@@ -70,6 +70,7 @@ If your site has a lot of content, the automatic search feature may cause it to 
 = 1.2.3 =
 * Add a check to prevent errors with plugins that don't use the WordPress AJAX API.
 * Update JavaScript to pass JSHint tests.
+* Update text domain and improve loading of language files.
 
 = 1.2.2 =
 * Changed keypress event for typeahead search results to work in Chrome.
