@@ -1,85 +1,91 @@
-jQuery(function($) {
-	var $postFilters = $('#posts-filter'),
-		$pagesNav = $postFilters.find('.tablenav-pages'),
-		$searchField = $('#post-search-input, #media-search-input'),
-		$searchStatus = $( '<table><tr class="no-items"><td class="colspanchange">' + BilsListTable.spinner + '</td></tr></table>' ),
-		$spinner = $searchField.before( BilsListTable.spinner ).siblings('.spinner'),
-		$theList = $('#the-list'),
-		$title = $('#wpbody h2:eq(0)'),
-		$subtitle = $title.find('.subtitle'),
-		subtitlePrefix = BilsListTable.subtitlePrefix,
-		theListOriginal = $theList.html(),
-		currentSubtitle, requestArgs, searchPosts, timeout;
+/*global ajaxurl:true, BilsListTable:true, userSettings:true */
 
-	// Hidden table contains a row with a spinner.
-	// Hiding this on screen allows the colspan of the cell to be updated as columns are toggled.
-	$searchStatus.hide().find('td.colspanchange').attr( 'colspan', $('.wp-list-table thead tr').children().length );
-	$('.wrap').append( $searchStatus );
+(function(window, $, undefined) {
+	'use strict';
 
-	// Save the current subtitle to restore later, or add a subtitle span.
-	if ( $subtitle.length ) {
-		currentSubtitle = $subtitle.text();
-	} else {
-		$subtitle = $title.append('<span class="subtitle"></span>').find('.subtitle');
-	}
+	jQuery(function($) {
+		var $postFilters = $('#posts-filter'),
+			$pagesNav = $postFilters.find('.tablenav-pages'),
+			$searchField = $('#post-search-input, #media-search-input'),
+			$searchStatus = $( '<table><tr class="no-items"><td class="colspanchange">' + BilsListTable.spinner + '</td></tr></table>' ),
+			$spinner = $searchField.before( BilsListTable.spinner ).siblings('.spinner'),
+			$theList = $('#the-list'),
+			$title = $('#wpbody h2:eq(0)'),
+			$subtitle = $title.find('.subtitle'),
+			subtitlePrefix = BilsListTable.subtitlePrefix,
+			theListOriginal = $theList.html(),
+			currentSubtitle, requestArgs, searchPosts, timeout;
 
-	// Construct an object of args to send via AJAX.
-	requestArgs = {
-		action:         'bils_get_posts_list_table',
-		mode:           $postFilters.find('input[name="mode"]').val() || null,
-		nonce:          BilsListTable.nonce,
-		order:          $postFilters.find('input[name="order"]').val() || null,
-		orderby:        $postFilters.find('input[name="orderby"]').val() || null,
-		post_mime_type: BilsListTable.postMimeType,
-		post_status:    $postFilters.find('input.post_status_page').val() || null,
-		post_type:      BilsListTable.postType,
-		screen:         BilsListTable.screen,
-		uid:            userSettings.uid // For determining hidden columns.
-	};
+		// Hidden table contains a row with a spinner.
+		// Hiding this on screen allows the colspan of the cell to be updated as columns are toggled.
+		$searchStatus.hide().find('td.colspanchange').attr( 'colspan', $('.wp-list-table thead tr').children().length );
+		$('.wrap').append( $searchStatus );
 
-	searchPosts = function() {
-		var searchTerm = $searchField.val();
-
-		// Restore the original screen state if the text in the search field is less than 3 characters.
-		if ( searchTerm.length < 3 ) {
-			if ( currentSubtitle ) {
-				$subtitle.text( currentSubtitle );
-			} else {
-				$subtitle.hide();
-			}
-
-			$pagesNav.show();
-			$theList.html( theListOriginal );
-			return;
+		// Save the current subtitle to restore later, or add a subtitle span.
+		if ( $subtitle.length ) {
+			currentSubtitle = $subtitle.text();
+		} else {
+			$subtitle = $title.append('<span class="subtitle"></span>').find('.subtitle');
 		}
 
-		// Begin searching.
-		$spinner.show();
-		$pagesNav.hide();
-		$theList.html( $searchStatus.html() );
+		// Construct an object of args to send via AJAX.
+		requestArgs = {
+			action:         'bils_get_posts_list_table',
+			mode:           $postFilters.find('input[name="mode"]').val() || null,
+			nonce:          BilsListTable.nonce,
+			order:          $postFilters.find('input[name="order"]').val() || null,
+			orderby:        $postFilters.find('input[name="orderby"]').val() || null,
+			post_mime_type: BilsListTable.postMimeType,
+			post_status:    $postFilters.find('input.post_status_page').val() || null,
+			post_type:      BilsListTable.postType,
+			screen:         BilsListTable.screen,
+			uid:            userSettings.uid // For determining hidden columns.
+		};
 
-		requestArgs['s'] = $searchField.val();
+		searchPosts = function() {
+			var searchTerm = $searchField.val();
 
-		$.ajax({
-			url: ajaxurl,
-			data: requestArgs,
-			success : function( data ) {
-				$theList.html( data ).find('.bils-error .colspanchange').attr( 'colspan', $('.wp-list-table thead tr').children().length );
+			// Restore the original screen state if the text in the search field is less than 3 characters.
+			if ( searchTerm.length < 3 ) {
+				if ( currentSubtitle ) {
+					$subtitle.text( currentSubtitle );
+				} else {
+					$subtitle.hide();
+				}
 
-				$subtitle.html( subtitlePrefix.replace( '%s', searchTerm ) ).show();
+				$pagesNav.show();
+				$theList.html( theListOriginal );
+				return;
+			}
 
-				$spinner.hide();
+			// Begin searching.
+			$spinner.show();
+			$pagesNav.hide();
+			$theList.html( $searchStatus.html() );
+
+			requestArgs['s'] = $searchField.val();
+
+			$.ajax({
+				url: ajaxurl,
+				data: requestArgs,
+				success : function( data ) {
+					$theList.html( data ).find('.bils-error .colspanchange').attr( 'colspan', $('.wp-list-table thead tr').children().length );
+
+					$subtitle.html( subtitlePrefix.replace( '%s', searchTerm ) ).show();
+
+					$spinner.hide();
+				}
+			});
+		};
+
+		$searchField.on('keydown.bils', function(e) {
+			var code = e.keyCode || e.which;
+
+			clearTimeout(timeout);
+
+			if ( 13 !== code ) { // Enter key.
+				timeout = setTimeout( searchPosts, 300 );
 			}
 		});
-	};
-
-	$searchField.on('keydown.bils', function(e) {
-		var code = e.keyCode || e.which;
-
-		clearTimeout(timeout);
-
-		if ( 13 !== code ) { // Enter key.
-			timeout = setTimeout( searchPosts, 300 );
-		}
 	});
-});
+})(this, jQuery);
