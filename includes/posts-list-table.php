@@ -44,7 +44,7 @@ class Better_Internal_Link_Search_Posts_List_Table {
 			'postType'       => ( 'upload' == $screen->id ) ? 'attachment' : $screen->post_type,
 			'screen'         => $screen->id,
 			'spinner'        => self::spinner( array( 'echo' => false ) ),
-			'subtitlePrefix' => __( 'Search results for &#8220;%s&#8221;', 'better-internal-link-search-i18n' ),
+			'subtitlePrefix' => __( 'Search results for &#8220;%s&#8221;', 'better-internal-link-search' ),
 		) );
 		?>
 		<style type="text/css">

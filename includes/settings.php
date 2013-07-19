@@ -28,11 +28,11 @@ class Better_Internal_Link_Search_Settings {
 	public static function register_settings() {
 		register_setting( 'writing', 'better_internal_link_search' );
 
-		add_settings_section( 'better-internal-link-search', __( 'Internal Linking', 'better-internal-link-search-i18n' ), '__return_null', 'writing' );
+		add_settings_section( 'better-internal-link-search', __( 'Internal Linking', 'better-internal-link-search' ), '__return_null', 'writing' );
 
 		add_settings_field(
 			'extensions',
-			__( 'Automatic Search', 'better-internal-link-search-i18n' ),
+			__( 'Automatic Search', 'better-internal-link-search' ),
 			array( __CLASS__, 'automatic_internal_link_search_field' ),
 			'writing',
 			'better-internal-link-search'
@@ -48,7 +48,7 @@ class Better_Internal_Link_Search_Settings {
 		$settings = self::get_settings();
 		?>
 		<input type="checkbox" name="better_internal_link_search[automatically_search_selection]" id="better-internal-link-search-automatically-search-selection" value="yes"<?php checked( $settings['automatically_search_selection'], 'yes' ); ?>>
-		<label for="better-internal-link-search-automatically-search-selection"><?php _e( 'Automatically search for text selected in the editor when opening the internal link manager?', 'better-internal-link-search-i18n' ); ?></label>
+		<label for="better-internal-link-search-automatically-search-selection"><?php _e( 'Automatically search for text selected in the editor when opening the internal link manager?', 'better-internal-link-search' ); ?></label>
 		<?php
 	}
 

@@ -8,6 +8,8 @@
  * Author URI: http://www.blazersix.com/
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: better-internal-link-search
+ * Domain Path: /languages/
  *
  * @package BetterInternalLinkSearch
  * @author Brady Vercher <brady@blazersix.com>
@@ -51,33 +53,44 @@ class Better_Internal_Link_Search {
 	 * @since 1.0.0
 	 */
 	public static function load() {
-		if ( is_admin() ) {
-			load_plugin_textdomain( 'better-internal-link-search', false, 'better-internal-link-search/languages' );
+		self::load_textdomain();
 
-			// Load settings.
-			include( BETTER_INTERNAL_LINK_SEARCH_DIR . 'includes/settings.php' );
-			Better_Internal_Link_Search_Settings::load();
+		// Load settings.
+		include( BETTER_INTERNAL_LINK_SEARCH_DIR . 'includes/settings.php' );
+		Better_Internal_Link_Search_Settings::load();
 
-			// Load post list table typeahead search.
-			include( BETTER_INTERNAL_LINK_SEARCH_DIR . 'includes/posts-list-table.php' );
-			Better_Internal_Link_Search_Posts_List_Table::load();
+		// Load post list table typeahead search.
+		include( BETTER_INTERNAL_LINK_SEARCH_DIR . 'includes/posts-list-table.php' );
+		Better_Internal_Link_Search_Posts_List_Table::load();
 
-			// Replace the default wp-link-ajax action.
-			if ( isset( $_POST['search'] ) ) {
-				remove_action( 'wp_ajax_wp-link-ajax', 'wp_link_ajax', 1 );
-				add_action( 'wp_ajax_wp-link-ajax', array( __CLASS__, 'ajax_get_link_search_results' ), 1 );
-			}
-
-			// Hook it up.
-			add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
-
-			// Enqueue Internal Link Manager javascript and styles.
-			add_action( 'admin_head-post.php', array( __CLASS__, 'admin_head_post' ) );
-			add_action( 'admin_head-post-new.php', array( __CLASS__, 'admin_head_post' ) );
-
-			// Upgrade routine.
-			add_action( 'admin_init', array( __CLASS__, 'upgrade' ) );
+		// Replace the default wp-link-ajax action.
+		if ( isset( $_POST['search'] ) ) {
+			remove_action( 'wp_ajax_wp-link-ajax', 'wp_link_ajax', 1 );
+			add_action( 'wp_ajax_wp-link-ajax', array( __CLASS__, 'ajax_get_link_search_results' ), 1 );
 		}
+
+		// Hook it up.
+		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
+
+		// Enqueue Internal Link Manager javascript and styles.
+		add_action( 'admin_head-post.php', array( __CLASS__, 'admin_head_post' ) );
+		add_action( 'admin_head-post-new.php', array( __CLASS__, 'admin_head_post' ) );
+
+		// Upgrade routine.
+		add_action( 'admin_init', array( __CLASS__, 'upgrade' ) );
+	}
+
+	/**
+	 * Load the plugin language files.
+	 *
+	 * @see http://www.geertdedeckere.be/article/loading-wordpress-language-files-the-right-way
+	 *
+	 * @since 1.2.3
+	 */
+	public static function load_textdomain() {
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'better-internal-link-search' );
+		load_textdomain( 'better-internal-link-search', WP_LANG_DIR . '/better-internal-link-search/' . $locale . '.mo' );
+		load_plugin_textdomain( 'better-internal-link-search', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
