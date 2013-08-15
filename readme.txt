@@ -11,7 +11,7 @@ Improve the internal link popup manager with time-saving enhancements and featur
 
 == Description ==
 
-Better Internal Link Search improves the default internal link searching feature in a number of ways, making it faster and easier to find the content you want to link to.
+Better Internal Link Search improves the default internal link searching feature in a number of ways, making it faster and easier to find the content you want to link up.
 
 The most basic feature limits results to posts and pages that contain your search term in the title, rather than returning every post that contains the term in the title *or content field* -- this greatly reduces the number of results on sites with a lot of content and should improve accuracy.
 
@@ -32,7 +32,17 @@ Beyond that simple change are more powerful features that can be customized for 
 
 Instantly see search results for pages, posts, media items or other custom post types on their Manage Posts screens. As soon as you start typing in the search field, the table instantly updates with results for whichever post type you're viewing. Pressing enter or clicking the search button will continue to return posts using the default search algorithm (post titles and content).
 
-Here is an overview of the plugin's features recorded by Eric Amundson of [Ivy Cat](http://www.ivycat.com/).
+= Additional Resources =
+
+* [Write a review](http://wordpress.org/support/view/plugin-reviews/better-internal-link-search#postform)
+* [Have a question?](http://wordpress.org/support/plugin/better-internal-link-search)
+* [Contribute on GitHub](https://github.com/bradyvercher/wp-better-internal-link-search)
+* [Follow @bradyvercher](https://twitter.com/bradyvercher)
+* [Hire Blazer Six](http://www.blazersix.com/)
+
+= Screencast =
+
+Eric Amundson over at [Ivy Cat](http://www.ivycat.com/) recorded this great overview of the plugin's features:
 
 http://www.youtube.com/watch?v=WfyTiVTdEX8
 
@@ -66,6 +76,9 @@ If your site has a lot of content, the automatic search feature may cause it to 
 5. A search modifier in action.
 
 == Changelog ==
+
+= 1.2.4 =
+* Fix a syntax error when calling array_merge().
 
 = 1.2.3 =
 * Add a check to prevent errors with plugins that don't use the WordPress AJAX API.
