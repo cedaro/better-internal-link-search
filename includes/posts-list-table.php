@@ -145,7 +145,7 @@ class Better_Internal_Link_Search_Posts_List_Table {
 	 * @param array $args Array of args to modify output.
 	 * @return void|string Echoes spinner HTML or returns it.
 	 */
-	function spinner( $args = array() ) {
+	public static function spinner( $args = array() ) {
 		$args = wp_parse_args( $args, array(
 			'id' => '',
 			'class' => 'ajax-loading',
