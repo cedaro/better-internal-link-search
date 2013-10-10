@@ -96,7 +96,6 @@ class Better_Internal_Link_Search_Posts_List_Table {
 			'orderby'          => $orderby,
 			'order'            => $order,
 			'posts_per_page'   => 20,
-			'suppress_filters' => true,
 		);
 
 		if ( 'attachment' == $post_type ) {
@@ -122,7 +121,7 @@ class Better_Internal_Link_Search_Posts_List_Table {
 
 		add_filter( 'posts_search', array( 'Better_Internal_Link_Search', 'limit_search_to_title' ), 10, 2 );
 
-		$wp_query = new WP_Query( $args );
+		wp_edit_posts_query( $args );
 
 		if ( 'attachment' == $post_type ) {
 			$wp_list_table = _get_list_table( 'WP_Media_List_Table', array( 'screen' => $_REQUEST['screen'] ) );
