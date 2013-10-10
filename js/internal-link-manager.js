@@ -46,17 +46,17 @@
 
 			// Determine what text is selected in the editor.
 			if ( 'undefined' !== typeof tinyMCE && ( editor = tinyMCE.activeEditor ) && ! editor.isHidden() ) {
-console.log( 'tinymce' );
+
 				var a = editor.dom.getParent(editor.selection.getNode(), 'A');
 				if ( null === a ) {
-					searchTerm = editor.selection.getContent();
+					searchTerm = editor.selection.getContent({ format: 'text' });
 				} else {
 					searchTerm = $(a).text();
 				}
 			} else {
 				var start = wpLink.textarea.selectionStart,
 					end = wpLink.textarea.selectionEnd;
-console.log( 'textarea' );
+
 				if ( 0 < end-start ) {
 					searchTerm = wpLink.textarea.value.substring(start, end);
 				}
