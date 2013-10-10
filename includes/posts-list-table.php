@@ -90,12 +90,12 @@ class Better_Internal_Link_Search_Posts_List_Table {
 		}
 
 		$args = array(
-			's'                => $_REQUEST['s'],
-			'post_type'        => $post_type,
-			'post_status'      => $_REQUEST['post_status'],
-			'orderby'          => $orderby,
-			'order'            => $order,
-			'posts_per_page'   => 20,
+			's'              => $_REQUEST['s'],
+			'post_type'      => $post_type,
+			'post_status'    => $_REQUEST['post_status'],
+			'orderby'        => $orderby,
+			'order'          => $order,
+			'posts_per_page' => 20,
 		);
 
 		if ( 'attachment' == $post_type ) {
@@ -147,9 +147,9 @@ class Better_Internal_Link_Search_Posts_List_Table {
 	 */
 	public static function spinner( $args = array() ) {
 		$args = wp_parse_args( $args, array(
-			'id' => '',
+			'id'    => '',
 			'class' => 'ajax-loading',
-			'echo' => true
+			'echo'  => true,
 		) );
 
 		if ( version_compare( get_bloginfo( 'version' ), '3.5-beta-1', '<' ) ) {

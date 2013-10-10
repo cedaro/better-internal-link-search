@@ -28,7 +28,6 @@
  * @package Better_Internal_Link_Search
  */
 
-
 /**
  * Search modifier help.
  *
@@ -251,7 +250,6 @@ function bils_itunes_search( $results, $args ) {
 		if ( isset( $json->resultCount ) && $start > $json->resultCount ) {
 			wp_die( 0 ); // abort!
 		}
-
 
 		$results = array();
 		foreach( $json->results as $item ) {
