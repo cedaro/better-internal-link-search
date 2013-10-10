@@ -318,7 +318,7 @@ class Better_Internal_Link_Search {
 		wp_localize_script( 'better-internal-link-search-internal-link-manager', 'BilsSettings', Better_Internal_Link_Search_Settings::get_settings() );
 		?>
 		<style type="text/css">
-		#wp-link .item-description { display: block; padding: 3px 0 0 10px;}
+		#wp-link .item-description { display: block; clear: both; padding: 3px 0 0 10px;}
 		</style>
 		<?php
 	}
