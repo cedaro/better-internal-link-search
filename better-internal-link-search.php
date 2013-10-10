@@ -90,7 +90,7 @@ class Better_Internal_Link_Search {
 	public static function load_textdomain() {
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'better-internal-link-search' );
 		load_textdomain( 'better-internal-link-search', WP_LANG_DIR . '/better-internal-link-search/' . $locale . '.mo' );
-		load_plugin_textdomain( 'better-internal-link-search', false, dirname( plugin_basename( __FILE__ ) ) . 'languages/' );
+		load_plugin_textdomain( 'better-internal-link-search', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
