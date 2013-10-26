@@ -2,7 +2,7 @@
 Contributors: blazersix, bradyvercher
 Tags: links, internal links, search, editor, nav menus
 Requires at least: 3.4
-Tested up to: 3.6
+Tested up to: 3.7
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -76,6 +76,12 @@ If your site has a lot of content, the automatic search feature may cause it to 
 5. A search modifier in action.
 
 == Changelog ==
+
+= 1.2.5
+* Clear floats for descriptions in results to prevent overlap.
+* Quit suppressing filters instant search so other plugins can filter the query.
+* Initialize the instant search query using wp_edit_posts_query() instead of WP_Query().
+* Fix strict PHP notices.
 
 = 1.2.4 =
 * Fix a syntax error when calling array_merge().
