@@ -2,8 +2,8 @@
 Contributors: blazersix, bradyvercher
 Tags: links, internal links, search, editor, nav menus
 Requires at least: 3.4
-Tested up to: 3.7
-Stable tag: trunk
+Tested up to: 3.8
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,7 +36,7 @@ Instantly see search results for pages, posts, media items or other custom post 
 
 * [Write a review](http://wordpress.org/support/view/plugin-reviews/better-internal-link-search#postform)
 * [Have a question?](http://wordpress.org/support/plugin/better-internal-link-search)
-* [Contribute on GitHub](https://github.com/bradyvercher/wp-better-internal-link-search)
+* [Contribute on GitHub](https://github.com/bradyvercher/better-internal-link-search)
 * [Follow @bradyvercher](https://twitter.com/bradyvercher)
 * [Hire Blazer Six](http://www.blazersix.com/)
 
