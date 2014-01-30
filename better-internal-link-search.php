@@ -136,10 +136,11 @@ class Better_Internal_Link_Search {
 			// Scheduled post concept from Evan Solomon's plugin.
 			// http://wordpress.org/extend/plugins/internal-linking-for-scheduled-posts/
 			$post_status = (array) $query->get( 'post_status' );
-			if ( ! in_array( 'future', $post_status ) ) {
-				$post_status[] = 'future';
-				$query->set( 'post_status', $post_status );
+			$post_status[] = 'future';
+			if ( current_user_can( 'read_private_posts' ) ) {
+				$post_status[] = 'private';
 			}
+			$query->set( 'post_status', array_unique( $post_status ) );
 
 			// Make sure 'posts_per_page' hasn't been explicitly set by a modifier to allow for paging of local results before overriding it.
 			if ( ! $query->get( 'posts_per_page' ) ) {
@@ -241,11 +242,14 @@ class Better_Internal_Link_Search {
 			require_once(ABSPATH . WPINC . '/class-wp-editor.php');
 			$posts = _WP_Editors::wp_link_query( $args );
 			if ( $posts ) {
-				$post_status_object = get_post_status_object( 'future' );
+				$future_status_object = get_post_status_object( 'future' );
+				$private_status_object = get_post_status_object( 'private' );
 
 				foreach( $posts as $key => $post ) {
 					if ( 'future' == get_post_status( $post['ID'] ) ) {
-						$posts[ $key ]['info'] = $post_status_object->label;
+						$posts[ $key ]['info'] = $future_status_object->label;
+					} elseif ( 'private' == get_post_status( $post['ID'] ) ) {
+						$posts[ $key ]['info'] .= ' (' . $private_status_object->label . ')';
 					}
 				}
 
