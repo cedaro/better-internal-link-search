@@ -68,6 +68,11 @@ function bils_default_modifier_help( $results ) {
 			'permalink' => 'http://wordpress.org/extend/plugins/',
 			'info'      => 'WordPress Plugins',
 		),
+		'shortlinks' => array(
+			'title'     => '<strong>-shortlink {query}</strong></span><span class="item-description">Insert a shortlink to a post or page instead of the full permalink.</span>',
+			'permalink' => home_url( '/' ),
+			'info'      => 'Local',
+		),
 		'spotify' => array(
 			'title'     => '<strong>-spotify:{entity} {query}</strong></span><span class="item-description">Search Spotify for a particular entity. Entity can be \'album\', \'artist\', or \'track\'; is optional and defaults to \'album\'.</span>',
 			'permalink' => 'http://www.spotify.com/',
@@ -536,3 +541,19 @@ function bils_media_search( $results, $args ) {
 	return $results;
 }
 add_filter( 'better_internal_link_search_modifier-media', 'bils_media_search', 10, 2 );
+
+/**
+ * Convert returned permalinks to shortlinks.
+ *
+ * <code>-shortlink {query}</code>
+ */
+function bils_convert_to_shortlinks( $results, $args ) {
+	if ( ! empty( $args['modifier'][0] ) && 'shortlink' == $args['modifier'][0] ) {
+		foreach ( $results as $key => $result ) {
+			$results[ $key ]['permalink'] = wp_get_shortlink( $result['ID'] );
+		}
+	}
+
+	return $results;
+}
+add_filter( 'better_internal_link_search_results', 'bils_convert_to_shortlinks', 10, 2 );
