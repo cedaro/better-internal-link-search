@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Better Internal Link Search 1.2.5\n"
+"Project-Id-Version: Better Internal Link Search 1.2.6\n"
 "Report-Msgid-Bugs-To: "
 "http://wordpress.org/support/plugin/better-internal-link-search\n"
 "POT-Creation-Date: 2014-08-04 17:00:59+00:00\n"
