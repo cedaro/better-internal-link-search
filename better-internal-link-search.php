@@ -83,15 +83,10 @@ class Better_Internal_Link_Search {
 	/**
 	 * Load the plugin language files.
 	 *
-	 * @link http://ottopress.com/2013/language-packs-101-prepwork/
-	 * @link http://www.geertdedeckere.be/article/loading-wordpress-language-files-the-right-way
-	 *
 	 * @since 1.2.3
 	 */
 	public static function load_textdomain() {
-		$locale = apply_filters( 'plugin_locale', get_locale(), 'better-internal-link-search' );
-		load_textdomain( 'better-internal-link-search', WP_LANG_DIR . '/better-internal-link-search/' . $locale . '.mo' );
-		load_plugin_textdomain( 'better-internal-link-search', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'better-internal-link-search', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	}
 
 	/**
@@ -339,11 +334,11 @@ class Better_Internal_Link_Search {
 	public static function get_shortcuts() {
 		$shortcuts = apply_filters( 'better_internal_link_search_shortcuts', array(
 			'home' => array(
-				'title'     => 'Home',
+				'title'     => __( 'Home', 'better-internal-link-search' ),
 				'permalink' => home_url( '/' ),
 			),
 			'siteurl' => array(
-				'title'     => 'Site URL',
+				'title'     => __( 'Site URL', 'better-internal-link-search' ),
 				'permalink' => site_url( '/' ),
 			)
 		) );
