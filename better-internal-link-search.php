@@ -314,8 +314,17 @@ class Better_Internal_Link_Search {
 	 * @since 1.0.0
 	 */
 	public static function admin_head_post() {
-		wp_enqueue_script( 'better-internal-link-search-internal-link-manager', BETTER_INTERNAL_LINK_SEARCH_URL . 'js/internal-link-manager.js', array( 'jquery' ) );
-		wp_localize_script( 'better-internal-link-search-internal-link-manager', 'BilsSettings', Better_Internal_Link_Search_Settings::get_settings() );
+		wp_enqueue_script(
+			'better-internal-link-search-internal-link-manager',
+			BETTER_INTERNAL_LINK_SEARCH_URL . 'js/internal-link-manager.js',
+			array( 'jquery', 'underscore', 'wplink' )
+		);
+
+		wp_localize_script(
+			'better-internal-link-search-internal-link-manager',
+			'BilsSettings',
+			Better_Internal_Link_Search_Settings::get_settings()
+		);
 		?>
 		<style type="text/css">
 		#wp-link .item-description { display: block; clear: both; padding: 3px 0 0 10px;}

@@ -127,7 +127,7 @@ add_filter( 'better_internal_link_search_modifier_help', 'bils_default_modifier_
  * <code>-codex {query}</code>
  */
 function bils_wpcodex_search( $results, $args ) {
-	// Don't want to hit the API for queries less than three characters.
+	// Don't hit the API for queries less than three characters.
 	if ( strlen( $args['s'] ) < 3 ) {
 		wp_die( 0 );
 	}
@@ -201,7 +201,7 @@ add_filter( 'better_internal_link_search_modifier-gists', 'bils_gists_search', 1
  * <code>-github {query}</code>
  */
 function bils_github_search( $results, $args ) {
-	// Don't want to hit the api for queries less than three characters.
+	// Don't hit the api for queries less than three characters.
 	if ( strlen( $args['s'] ) < 3 ) {
 		wp_die( 0 );
 	}
@@ -247,7 +247,7 @@ add_filter( 'better_internal_link_search_modifier-github', 'bils_github_search',
  * <code>-itunes:{entity} {query}</code> (entities: album, artist, podcast, track)
  */
 function bils_itunes_search( $results, $args ) {
-	// Don't want to hit the api for queries less than three characters.
+	// Don't hit the api for queries less than three characters.
 	if ( strlen( $args['s'] ) < 3 ) {
 		wp_die( 0 );
 	}
@@ -263,6 +263,7 @@ function bils_itunes_search( $results, $args ) {
 		'podcast' => 'podcast',
 		'track'   => 'song',
 	);
+
 	$entity = ( isset( $args['modifier'][1] ) && array_key_exists( $args['modifier'][1], $api_entities ) ) ? $api_entities[ $args['modifier'][1] ] : 'album';
 
 	$search_args = array(
@@ -350,7 +351,7 @@ add_filter( 'better_internal_link_search_modifier-itunes', 'bils_itunes_search',
  * <code>-plugins {query}</code>
  */
 function bils_wpplugins_search( $results, $args ) {
-	// Don't want to hit the api for queries less than three characters.
+	// Don't hit the api for queries less than three characters.
 	if ( strlen( $args['s'] ) < 3 ) {
 		wp_die( 0 );
 	}
@@ -539,7 +540,7 @@ add_filter( 'better_internal_link_search_modifier-wikipedia', 'bils_wikipedia_se
 /**
  * Search for an attachment.
  *
- * Will produce the raw link to the media (not the permalink).
+ * Will produce the direct link to the media (not the permalink).
  *
  * <code>-media {filename}</code>
  *

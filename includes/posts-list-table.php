@@ -37,7 +37,12 @@ class Better_Internal_Link_Search_Posts_List_Table {
 	public static function admin_head_edit() {
 		$screen = get_current_screen();
 
-		wp_enqueue_script( 'bils-posts-list-table', BETTER_INTERNAL_LINK_SEARCH_URL . 'js/posts-list-table.js', array( 'jquery' ) );
+		wp_enqueue_script(
+			'bils-posts-list-table',
+			BETTER_INTERNAL_LINK_SEARCH_URL . 'js/posts-list-table.js',
+			array( 'jquery' )
+		);
+
 		wp_localize_script( 'bils-posts-list-table', 'BilsListTable', array(
 			'nonce'          => wp_create_nonce( 'bils-posts-list-table-instant-search' ),
 			'postMimeType'   => ( isset( $_REQUEST['post_mime_type'] ) ) ? $_REQUEST['post_mime_type'] : null,

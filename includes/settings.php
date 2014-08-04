@@ -28,7 +28,12 @@ class Better_Internal_Link_Search_Settings {
 	public static function register_settings() {
 		register_setting( 'writing', 'better_internal_link_search' );
 
-		add_settings_section( 'better-internal-link-search', __( 'Internal Linking', 'better-internal-link-search' ), '__return_null', 'writing' );
+		add_settings_section(
+			'better-internal-link-search',
+			__( 'Internal Linking', 'better-internal-link-search' ),
+			'__return_null',
+			'writing'
+		);
 
 		add_settings_field(
 			'extensions',
