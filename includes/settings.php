@@ -36,9 +36,17 @@ class Better_Internal_Link_Search_Settings {
 		);
 
 		add_settings_field(
-			'extensions',
+			'automatically-search-selection',
 			__( 'Automatic Search', 'better-internal-link-search' ),
 			array( __CLASS__, 'automatic_internal_link_search_field' ),
+			'writing',
+			'better-internal-link-search'
+		);
+
+		add_settings_field(
+			'include-term-results',
+			__( 'Include Terms', 'better-internal-link-search' ),
+			array( __CLASS__, 'include_term_results_field' ),
 			'writing',
 			'better-internal-link-search'
 		);
@@ -58,14 +66,32 @@ class Better_Internal_Link_Search_Settings {
 	}
 
 	/**
+	 * Include terms setting field.
+	 *
+	 * @since 1.2.7
+	 */
+	public static function include_term_results_field() {
+		$settings = self::get_settings();
+		?>
+		<input type="checkbox" name="better_internal_link_search[include_term_results]" id="better-internal-link-search-include-term-results" value="yes"<?php checked( $settings['include_term_results'], 'yes' ); ?>>
+		<label for="better-internal-link-search-include-term-results"><?php _e( 'Include term archives in search results?', 'better-internal-link-search' ); ?></label>
+		<?php
+	}
+
+	/**
 	 * Retrieve the plugin settings.
 	 *
 	 * @since 1.1.2
 	 */
-	public static function get_settings() {
+	public static function get_settings( $key = '' ) {
 		$settings = wp_parse_args( (array) get_option( 'better_internal_link_search' ), array(
-			'automatically_search_selection' => 'no'
+			'automatically_search_selection' => 'no',
+			'include_term_results'           => 'no',
 		) );
+
+		if ( ! empty( $key ) && isset( $settings[ $key ] ) ) {
+			$settings = $settings[ $key ];
+		}
 
 		return $settings;
 	}

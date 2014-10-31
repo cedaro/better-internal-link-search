@@ -251,24 +251,26 @@ class Better_Internal_Link_Search {
 				$results = array_merge( $results, $posts );
 			}
 
-			// Search for matching term archives.
-			$search = '%' . like_escape( $s ) . '%';
-			$terms = $wpdb->get_results( $wpdb->prepare( "SELECT t.term_id, t.name, tt.taxonomy
-				FROM $wpdb->terms t
-				INNER JOIN $wpdb->term_taxonomy tt ON t.term_id=tt.term_id
-				WHERE t.name LIKE %s
-				ORDER BY name ASC", $search ) );
+			if ( 'yes' === Better_Internal_Link_Search_Settings::get_settings( 'include_term_results' ) ) {
+				// Search for matching term archives.
+				$search = '%' . like_escape( $s ) . '%';
+				$terms = $wpdb->get_results( $wpdb->prepare( "SELECT t.term_id, t.name, tt.taxonomy
+					FROM $wpdb->terms t
+					INNER JOIN $wpdb->term_taxonomy tt ON t.term_id=tt.term_id
+					WHERE t.name LIKE %s
+					ORDER BY name ASC", $search ) );
 
-			if ( $terms ) {
-				foreach ( $terms as $term ) {
-					$taxonomy = get_taxonomy( $term->taxonomy );
+				if ( $terms ) {
+					foreach ( $terms as $term ) {
+						$taxonomy = get_taxonomy( $term->taxonomy );
 
-					if ( $taxonomy->query_var ) {
-						$results[] = array(
-							'title'     => trim( esc_html( strip_tags( $term->name ) ) ),
-							'permalink' => get_term_link( (int) $term->term_id, $term->taxonomy ),
-							'info'      => $taxonomy->labels->singular_name,
-						);
+						if ( $taxonomy->query_var ) {
+							$results[] = array(
+								'title'     => trim( esc_html( strip_tags( $term->name ) ) ),
+								'permalink' => get_term_link( (int) $term->term_id, $term->taxonomy ),
+								'info'      => $taxonomy->labels->singular_name,
+							);
+						}
 					}
 				}
 			}
@@ -443,16 +445,24 @@ class Better_Internal_Link_Search {
 	 * @since 1.1.2
 	 */
 	public static function upgrade() {
-		$saved_version = get_option( 'better_internal_link_search_version' );
+		$saved_version  = get_option( 'better_internal_link_search_version' );
+		$update_version = false;
 
-		// If the plugin version setting isn't set or if it's below 1.1.2, add default settings and update the saved version.
 		if ( ! $saved_version || version_compare( $saved_version, '1.1.2', '<' ) ) {
-			$plugin_data = get_plugin_data( __FILE__ );
-
-			// Add default settings.
+			$update_version = true;
 			update_option( 'better_internal_link_search', array( 'automatically_search_selection' => 'yes' ) );
+		}
 
+		if ( ! $saved_version || version_compare( $saved_version, '1.2.7', '<' ) ) {
+			$update_version = true;
+			$settings = Better_Internal_Link_Search_Settings::get_settings();
+			$settings['include_term_results'] = 'yes';
+			update_option( 'better_internal_link_search', $settings );
+		}
+
+		if ( $update_version ) {
 			// Update saved version number.
+			$plugin_data = get_plugin_data( __FILE__ );
 			update_option( 'better_internal_link_search_version', $plugin_data['Version'] );
 		}
 	}
