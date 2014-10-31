@@ -220,7 +220,7 @@ class Better_Internal_Link_Search {
 			// Allow plugins to intercept the request and add their own results or short-circuit execution.
 			$pre_results = (array) apply_filters( 'pre_better_internal_link_search_results', array(), $args );
 			if ( ! empty( $pre_results ) ) {
-				array_merge( $results, $pre_results );
+				$results = array_merge( $results, $pre_results );
 			}
 
 			// Short-circuit if this is a paged request. The first request should have returned all results.
