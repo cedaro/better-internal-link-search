@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Better Internal Link Search 1.2.6\n"
+"Project-Id-Version: Better Internal Link Search 1.2.7\n"
 "Report-Msgid-Bugs-To: "
 "http://wordpress.org/support/plugin/better-internal-link-search\n"
 "POT-Creation-Date: 2014-08-04 17:00:59+00:00\n"
@@ -12,24 +12,24 @@ msgstr ""
 "PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"X-Generator: grunt-wp-i18n 0.4.6\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-Bookmarks: \n"
 "X-Poedit-Country: United States\n"
-"X-Poedit-KeywordsList: "
-"__;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c;_nc:1,2;_x:1,"
-"2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: better-internal-link-search.php:346
+#: better-internal-link-search.php:348
 msgid "Home"
 msgstr ""
 
-#: better-internal-link-search.php:350
+#: better-internal-link-search.php:352
 msgid "Site URL"
 msgstr ""
 
@@ -123,10 +123,18 @@ msgstr ""
 msgid "Automatic Search"
 msgstr ""
 
-#: includes/settings.php:56
+#: includes/settings.php:48
+msgid "Include Terms"
+msgstr ""
+
+#: includes/settings.php:64
 msgid ""
 "Automatically search for text selected in the editor when opening the "
 "internal link manager?"
+msgstr ""
+
+#: includes/settings.php:77
+msgid "Include term archives in search results?"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

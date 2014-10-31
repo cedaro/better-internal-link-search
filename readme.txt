@@ -77,6 +77,10 @@ If your site has a lot of content, the automatic search feature may cause it to 
 
 == Changelog ==
 
+= 1.2.7 =
+* Added a setting to disable inclusion of term archives in default search results.
+* Fixed a bug that caused the 'pre_better_internal_link_search_results' filter to have no effect on results.
+
 = 1.2.6 =
 * Fixed the automatic searching feature that quit working in WordPress 3.9. Works in 4.0+.
 * Internationalized additional strings.
