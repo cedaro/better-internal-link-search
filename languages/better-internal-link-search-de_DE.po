@@ -1,0 +1,182 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Better Internal Link Search v1.2.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-11-03 09:59:00+0000\n"
+"Last-Translator: wpdoc.de <dev@wpdoc.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#. translators: plugin header field 'Name'
+#: better-internal-link-search.php:0
+#@ better-internal-link-search
+msgid "Better Internal Link Search"
+msgstr "Verbesserte Intere Linksuche"
+
+#. translators: plugin header field 'PluginURI'
+#: better-internal-link-search.php:0
+#@ better-internal-link-search
+msgid "http://wordpress.org/extend/plugins/better-internal-link-search/"
+msgstr "http://wordpress.org/extend/plugins/better-internal-link-search/"
+
+#. translators: plugin header field 'Description'
+#: better-internal-link-search.php:0
+#@ better-internal-link-search
+msgid "Improve the internal link popup functionality with time saving enhancements and features."
+msgstr "Verbessere den internen Link-Dialog mit zeitsparenden Verbesserungen und Funktionen."
+
+#. translators: plugin header field 'Author'
+#: better-internal-link-search.php:0
+#@ better-internal-link-search
+msgid "Blazer Six"
+msgstr "Blazer Six"
+
+#. translators: plugin header field 'AuthorURI'
+#: better-internal-link-search.php:0
+#@ better-internal-link-search
+msgid "http://www.blazersix.com/"
+msgstr "http://www.blazersix.com/"
+
+#. translators: plugin header field 'Version'
+#: better-internal-link-search.php:0
+#@ better-internal-link-search
+msgid "1.2.7"
+msgstr "1.2.7"
+
+#: better-internal-link-search.php:348
+#@ better-internal-link-search
+msgid "Home"
+msgstr "Startseite"
+
+#: better-internal-link-search.php:352
+#@ better-internal-link-search
+msgid "Site URL"
+msgstr "Website URL"
+
+#: includes/posts-list-table.php:52
+#, php-format
+#@ better-internal-link-search
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Suchergebnisse für &#8220;%s&#8221;"
+
+#: includes/search-modifiers.php:44
+#@ better-internal-link-search
+msgid "Search the WordPress Codex"
+msgstr "Den WordPress Codex durchsuchen"
+
+#: includes/search-modifiers.php:47
+#@ better-internal-link-search
+msgid "WordPress Codex"
+msgstr "WordPress Codex"
+
+#: includes/search-modifiers.php:52
+#@ better-internal-link-search
+msgid "Lists gists for the specified user."
+msgstr "Gists eines bestimmten Benutzers anzeigen."
+
+#: includes/search-modifiers.php:55
+#: includes/search-modifiers.php:63
+#@ better-internal-link-search
+msgid "GitHub"
+msgstr "GitHub"
+
+#: includes/search-modifiers.php:60
+#@ better-internal-link-search
+msgid "Searches GitHub for a respository matching the query."
+msgstr "Durchsucht GitHub nach einem Repository, dass der Suchanfrage entspricht."
+
+#: includes/search-modifiers.php:68
+#@ better-internal-link-search
+msgid "Search iTunes for a particular entity. Entity can be 'album', 'artist', 'podcast' or 'track'; It is optional and defaults to 'album'."
+msgstr "Durchsucht iTunes nach einer bestimmten Sache. Diese kann als 'album', 'podcast' oder 'track' (Titel) definiert werden. Dies ist optional und die Grundeinstellung ist 'album'."
+
+#: includes/search-modifiers.php:71
+#@ better-internal-link-search
+msgid "iTunes"
+msgstr "iTunes"
+
+#: includes/search-modifiers.php:76
+#@ better-internal-link-search
+msgid "Search for media attachments in your local WordPress installation. The URL returned will link directly to the file."
+msgstr "Die lokale WordPress-Installation nach Mediendateien durchsuchen. Die ausgegebene URL ist ein direkter Datei-Link."
+
+#: includes/search-modifiers.php:79
+#: includes/search-modifiers.php:95
+#: includes/search-modifiers.php:111
+#@ better-internal-link-search
+msgid "Local"
+msgstr "Lokal"
+
+#: includes/search-modifiers.php:84
+#@ better-internal-link-search
+msgid "Search the WordPress plugin directory."
+msgstr "Das WordPress-Plugin-Verzeichnis durchsuchen."
+
+#: includes/search-modifiers.php:87
+#@ better-internal-link-search
+msgid "WordPress Plugins"
+msgstr "WordPress Plugins"
+
+#: includes/search-modifiers.php:92
+#@ better-internal-link-search
+msgid "Insert a shortlink to a post or page instead of the full permalink."
+msgstr "Einen Shortlink zu einem Beitrag oder einer Seite anstelle des vollständigen Permalinks einfügen."
+
+#: includes/search-modifiers.php:100
+#@ better-internal-link-search
+msgid "Search Spotify for a particular entity. Entity can be 'album', 'artist', or 'track'; is optional and defaults to 'album'."
+msgstr "Durchsucht Spotify nach einer bestimmten Sache. Diese kann als 'album', 'podcast' oder 'track' (Titel) definiert werden. Dies ist optional und die Grundeinstellung ist 'album'."
+
+#: includes/search-modifiers.php:103
+#@ better-internal-link-search
+msgid "Spotify"
+msgstr "Spotify"
+
+#: includes/search-modifiers.php:108
+#@ better-internal-link-search
+msgid "Search your local WordPress installation for the specified user and return the URL specified by <code>url_type</code>. The default URL returned is the user's archive listing their published posts. If set to <code>url</code>, the returned link will be their website as entered in their profile. Setting the third argument to <code>all</code> will return all users and not just authors. The <code>user_login</code> parameter must be an exact match; if left blank, all users are returned."
+msgstr "Die lokale WordPress-Installation nach einem bestimmten Benutzer durchsuchen und die URL die von <code>url_type</code> festgelegt wird ausgeben. Standardmässig wird die URL zum Archiv der veröffentlichten Beiträge des Nutzers ausgegeben. Wenn <code>url</code> abgefragt wird, wird die im Benutzerprofil angegebene Website ausgegeben. Wird das dritte Argument auf <code>all</code> gesetzt, werden alle Benutzer und nicht nur die Autoren ausgegeben. Der <code>user_login</code> Parameter muss genau zutreffen; wenn er leer ist, werden alle Benutzer ausgegeben."
+
+#: includes/search-modifiers.php:116
+#@ better-internal-link-search
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+#: includes/settings.php:33
+#@ better-internal-link-search
+msgid "Internal Linking"
+msgstr "Interne Verlinkung"
+
+#: includes/settings.php:40
+#@ better-internal-link-search
+msgid "Automatic Search"
+msgstr "Automatische Suche"
+
+#: includes/settings.php:48
+#@ better-internal-link-search
+msgid "Include Terms"
+msgstr "Begriffe anzeigen"
+
+#: includes/settings.php:64
+#@ better-internal-link-search
+msgid "Automatically search for text selected in the editor when opening the internal link manager?"
+msgstr "Automatisch nach dem im Editor markierten Text suchen, wenn der interne Link-Dialog geöffnet wird?"
+
+#: includes/settings.php:77
+#@ better-internal-link-search
+msgid "Include term archives in search results?"
+msgstr "Zusätzlich die Archive zu einem Begriff in den Suchergebnissen anzeigen?"
+
