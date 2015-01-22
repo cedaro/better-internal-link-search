@@ -2,7 +2,7 @@
 Contributors: blazersix, bradyvercher
 Tags: links, internal links, search, editor, nav menus
 Requires at least: 3.8
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -76,6 +76,10 @@ If your site has a lot of content, the automatic search feature may cause it to 
 5. A search modifier in action.
 
 == Changelog ==
+
+= 1.2.8 =
+* Added German translation.
+* Updated to use wpdb::esc_like() instead of [deprecated like_escape() method](https://make.wordpress.org/core/2014/06/20/like_escape-is-deprecated-in-wordpress-4-0/).
 
 = 1.2.7 =
 * Added a setting to disable inclusion of term archives in default search results.
