@@ -80,7 +80,7 @@
 		 * Initialize the wpLink manager.
 		 */
 		init: function() {
-			this.$searchField = $( '#search-field' ).width( 200 );
+			this.$searchField = $( '#search-field, #wp-link-search' ).width( 200 );
 
 			// Proxy the internal link search method.
 			this._wpLinkSearchInternalLinks = wpLink.searchInternalLinks;
