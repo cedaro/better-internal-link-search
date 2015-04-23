@@ -264,7 +264,7 @@ class Better_Internal_Link_Search {
 					foreach ( $terms as $term ) {
 						$taxonomy = get_taxonomy( $term->taxonomy );
 
-						if ( $taxonomy->query_var ) {
+						if ( isset( $taxonomy->query_var ) ) {
 							$results[] = array(
 								'title'     => trim( esc_html( strip_tags( $term->name ) ) ),
 								'permalink' => get_term_link( (int) $term->term_id, $term->taxonomy ),
