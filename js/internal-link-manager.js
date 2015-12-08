@@ -20,8 +20,8 @@
 				wpActiveEditor = window.wpActiveEditor,
 				end, start;
 
-			if ( false === ed ) {
-				return false;
+			if ( ! ed ) {
+				return '';
 			}
 
 			if ( ed && ! ed.isHidden() ) {
