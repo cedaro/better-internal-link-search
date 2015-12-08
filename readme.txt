@@ -1,8 +1,8 @@
 === Better Internal Link Search ===
 Contributors: blazersix, bradyvercher
 Tags: links, internal links, search, editor, nav menus
-Requires at least: 3.8
-Tested up to: 4.2
+Requires at least: 4.1
+Tested up to: 4.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -76,6 +76,9 @@ If your site has a lot of content, the automatic search feature may cause it to 
 5. A search modifier in action.
 
 == Changelog ==
+
+= 1.2.10 =
+* Fixed a bug when using with Advanced Custom Fields. Props [lmartins](https://wordpress.org/support/profile/lmartins) and [coreyw](https://wordpress.org/support/profile/coreyw).
 
 = 1.2.9 =
 * Updated the search field to selector to account for an id change in WordPress 4.2.

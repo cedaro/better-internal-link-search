@@ -3,8 +3,8 @@
 Improve the internal link popup manager in WordPress with time-saving enhancements and features.
 
 __Contributors:__ [Brady Vercher](https://twitter.com/bradyvercher)  
-__Requires:__ 3.8  
-__Tested up to:__ 4.1  
+__Requires:__ 4.1  
+__Tested up to:__ 4.4  
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
 Better Internal Link Search improves the default internal link searching feature in WordPress in a number of ways, making it faster and easier to find the content you want to link to.
