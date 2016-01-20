@@ -72,8 +72,8 @@ class Better_Internal_Link_Search {
 		// Hook it up.
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 
-		// Enqueue Internal Link Manager javascript and styles.
-		add_action( 'wp_enqueue_editor', array( __CLASS__, 'admin_head' ) );
+		// Enqueue Internal Link Manager JavaScript and styles.
+		add_action( 'wp_enqueue_editor', array( __CLASS__, 'enqueue_editor_assets' ) );
 
 		// Upgrade routine.
 		add_action( 'admin_init', array( __CLASS__, 'upgrade' ) );
@@ -312,7 +312,7 @@ class Better_Internal_Link_Search {
 	 * clicked. Automatically executes a search request and returns the
 	 * results.
 	 */
-	public static function admin_head() {
+	public static function enqueue_editor_assets() {
 		wp_enqueue_script(
 			'better-internal-link-search-internal-link-manager',
 			BETTER_INTERNAL_LINK_SEARCH_URL . 'js/internal-link-manager.js',
@@ -325,15 +325,17 @@ class Better_Internal_Link_Search {
 			Better_Internal_Link_Search_Settings::get_settings()
 		);
 
-		add_action( 'admin_print_styles', array( __CLASS__, 'admin_head_css' ) );
+		add_action( 'after_wp_tiny_mce', array( __CLASS__, 'print_editor_styles' ), 1 );
 	}
 
 	/**
 	 * Prints the CSS needed
 	 */
-	public static function admin_head_css() {
+	public static function print_editor_styles() {
 		?>
-		<style>#wp-link .item-description{display:block;clear:both;padding:3px 0 0 10px;}</style>
+		<style type="text/css">
+		#wp-link .item-description{ display: block; clear:both; padding: 3px 0 0 10px;}
+		</style>
 		<?php
 	}
 
