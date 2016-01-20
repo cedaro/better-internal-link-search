@@ -73,8 +73,7 @@ class Better_Internal_Link_Search {
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 
 		// Enqueue Internal Link Manager javascript and styles.
-		add_action( 'admin_head-post.php', array( __CLASS__, 'admin_head_post' ) );
-		add_action( 'admin_head-post-new.php', array( __CLASS__, 'admin_head_post' ) );
+		add_action( 'wp_enqueue_editor', array( __CLASS__, 'admin_head' ) );
 
 		// Upgrade routine.
 		add_action( 'admin_init', array( __CLASS__, 'upgrade' ) );
@@ -312,10 +311,8 @@ class Better_Internal_Link_Search {
 	 * "Insert/edit link" popup when the link button in the toolbar is
 	 * clicked. Automatically executes a search request and returns the
 	 * results.
-	 *
-	 * @since 1.0.0
 	 */
-	public static function admin_head_post() {
+	public static function admin_head() {
 		wp_enqueue_script(
 			'better-internal-link-search-internal-link-manager',
 			BETTER_INTERNAL_LINK_SEARCH_URL . 'js/internal-link-manager.js',
@@ -327,10 +324,16 @@ class Better_Internal_Link_Search {
 			'BilsSettings',
 			Better_Internal_Link_Search_Settings::get_settings()
 		);
+
+		add_action( 'admin_print_styles', array( __CLASS__, 'admin_head_css' ) );
+	}
+
+	/**
+	 * Prints the CSS needed
+	 */
+	public static function admin_head_css() {
 		?>
-		<style type="text/css">
-		#wp-link .item-description { display: block; clear: both; padding: 3px 0 0 10px;}
-		</style>
+		<style>#wp-link .item-description{display:block;clear:both;padding:3px 0 0 10px;}</style>
 		<?php
 	}
 
