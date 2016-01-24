@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Better Internal Link Search v1.2.7\n"
+"Project-Id-Version: Better Internal Link Search v1.2.10\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-11-03 09:59:00+0000\n"
+"PO-Revision-Date: 2016-01-24 21:28:27+0000\n"
 "Last-Translator: wpdoc.de <dev@wpdoc.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: better-internal-link-search.php:0
 #@ better-internal-link-search
 msgid "Better Internal Link Search"
-msgstr "Verbesserte Intere Linksuche"
+msgstr "Verbesserte Interne Linksuche"
 
 #. translators: plugin header field 'PluginURI'
 #: better-internal-link-search.php:0
@@ -36,7 +36,7 @@ msgstr "http://wordpress.org/extend/plugins/better-internal-link-search/"
 #: better-internal-link-search.php:0
 #@ better-internal-link-search
 msgid "Improve the internal link popup functionality with time saving enhancements and features."
-msgstr "Verbessere den internen Link-Dialog mit zeitsparenden Verbesserungen und Funktionen."
+msgstr "Durch Verbesserungen beim Link-Dialogfeld schneller auf Beitr&auml;ge oder Seiten verlinken."
 
 #. translators: plugin header field 'Author'
 #: better-internal-link-search.php:0
@@ -49,12 +49,6 @@ msgstr "Blazer Six"
 #@ better-internal-link-search
 msgid "http://www.blazersix.com/"
 msgstr "http://www.blazersix.com/"
-
-#. translators: plugin header field 'Version'
-#: better-internal-link-search.php:0
-#@ better-internal-link-search
-msgid "1.2.7"
-msgstr "1.2.7"
 
 #: better-internal-link-search.php:348
 #@ better-internal-link-search
@@ -179,4 +173,10 @@ msgstr "Automatisch nach dem im Editor markierten Text suchen, wenn der interne 
 #@ better-internal-link-search
 msgid "Include term archives in search results?"
 msgstr "Zusätzlich die Archive zu einem Begriff in den Suchergebnissen anzeigen?"
+
+#. translators: plugin header field 'Version'
+#: better-internal-link-search.php:0
+#@ better-internal-link-search
+msgid "1.2.10"
+msgstr ""
 
