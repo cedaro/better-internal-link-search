@@ -57,7 +57,7 @@ function bils_default_modifier_help( $results ) {
 		'github' => array(
 			'title'     => sprintf(
 				'<strong>-github {query}</strong></span><span class="item-description">%s</span>',
-				__( 'Searches GitHub for a respository matching the query.', 'better-internal-link-search' )
+				__( 'Searches GitHub for a repository matching the query.', 'better-internal-link-search' )
 			),
 			'permalink' => 'https://github.com/',
 			'info'      => __( 'GitHub', 'better-internal-link-search' ),

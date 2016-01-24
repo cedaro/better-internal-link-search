@@ -3,7 +3,7 @@
  * Plugin Name: Better Internal Link Search
  * Plugin URI: http://wordpress.org/extend/plugins/better-internal-link-search/
  * Description: Improve the internal link popup functionality with time saving enhancements and features.
- * Version: 1.2.7
+ * Version: 1.2.10
  * Author: Blazer Six
  * Author URI: http://www.blazersix.com/
  * License: GPL-2.0+
@@ -72,9 +72,8 @@ class Better_Internal_Link_Search {
 		// Hook it up.
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 
-		// Enqueue Internal Link Manager javascript and styles.
-		add_action( 'admin_head-post.php', array( __CLASS__, 'admin_head_post' ) );
-		add_action( 'admin_head-post-new.php', array( __CLASS__, 'admin_head_post' ) );
+		// Enqueue Internal Link Manager JavaScript and styles.
+		add_action( 'wp_enqueue_editor', array( __CLASS__, 'enqueue_editor_assets' ) );
 
 		// Upgrade routine.
 		add_action( 'admin_init', array( __CLASS__, 'upgrade' ) );
@@ -166,7 +165,7 @@ class Better_Internal_Link_Search {
 		$searchand = '';
 
 		foreach( (array) $q['search_terms'] as $term ) {
-			$term = esc_sql( like_escape( $term ) );
+			$term = esc_sql( self::esc_like( $term ) );
 			$search.= "{$searchand}(($wpdb->posts.post_title LIKE '{$n}{$term}{$n}'))";
 			$searchand = ' AND ';
 		}
@@ -253,7 +252,7 @@ class Better_Internal_Link_Search {
 
 			if ( 'yes' === Better_Internal_Link_Search_Settings::get_settings( 'include_term_results' ) ) {
 				// Search for matching term archives.
-				$search = '%' . like_escape( $s ) . '%';
+				$search = '%' . self::esc_like( $s ) . '%';
 				$terms = $wpdb->get_results( $wpdb->prepare( "SELECT t.term_id, t.name, tt.taxonomy
 					FROM $wpdb->terms t
 					INNER JOIN $wpdb->term_taxonomy tt ON t.term_id=tt.term_id
@@ -264,7 +263,7 @@ class Better_Internal_Link_Search {
 					foreach ( $terms as $term ) {
 						$taxonomy = get_taxonomy( $term->taxonomy );
 
-						if ( $taxonomy->query_var ) {
+						if ( isset( $taxonomy->query_var ) ) {
 							$results[] = array(
 								'title'     => trim( esc_html( strip_tags( $term->name ) ) ),
 								'permalink' => get_term_link( (int) $term->term_id, $term->taxonomy ),
@@ -312,10 +311,8 @@ class Better_Internal_Link_Search {
 	 * "Insert/edit link" popup when the link button in the toolbar is
 	 * clicked. Automatically executes a search request and returns the
 	 * results.
-	 *
-	 * @since 1.0.0
 	 */
-	public static function admin_head_post() {
+	public static function enqueue_editor_assets() {
 		wp_enqueue_script(
 			'better-internal-link-search-internal-link-manager',
 			BETTER_INTERNAL_LINK_SEARCH_URL . 'js/internal-link-manager.js',
@@ -327,9 +324,17 @@ class Better_Internal_Link_Search {
 			'BilsSettings',
 			Better_Internal_Link_Search_Settings::get_settings()
 		);
+
+		add_action( 'after_wp_tiny_mce', array( __CLASS__, 'print_editor_styles' ), 1 );
+	}
+
+	/**
+	 * Prints the CSS needed
+	 */
+	public static function print_editor_styles() {
 		?>
 		<style type="text/css">
-		#wp-link .item-description { display: block; clear: both; padding: 3px 0 0 10px;}
+		#wp-link .item-description{ display: block; clear:both; padding: 3px 0 0 10px;}
 		</style>
 		<?php
 	}
@@ -465,5 +470,23 @@ class Better_Internal_Link_Search {
 			$plugin_data = get_plugin_data( __FILE__ );
 			update_option( 'better_internal_link_search_version', $plugin_data['Version'] );
 		}
+	}
+
+	/**
+	 * Escape LIKE special characters.
+	 *
+	 * @since 1.2.8
+	 *
+	 * @see wpdb::esc_like()
+	 * @link https://make.wordpress.org/core/2014/06/20/like_escape-is-deprecated-in-wordpress-4-0/
+	 */
+	public static function esc_like( $text ) {
+		global $wpdb;
+
+		if ( method_exists( $wpdb, 'esc_like' ) ) {
+			return $wpdb->esc_like( $text );
+		}
+
+		return addcslashes( $text, '_%\\' );
 	}
 }

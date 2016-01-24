@@ -5,7 +5,7 @@ module.exports = function( grunt ) {
 
 	require( 'matchdep' ).filterDev( 'grunt-*' ).forEach( grunt.loadNpmTasks );
 
-	grunt.initConfig( {
+	grunt.initConfig({
 
 		jshint: {
 			options: {
@@ -47,13 +47,13 @@ module.exports = function( grunt ) {
 
 		watch: {
 			js: {
-				files: ['<%= jshint.all %>'],
-				tasks: ['jshint']
+				files: [ '<%= jshint.all %>' ],
+				tasks: [ 'jshint' ]
 			}
 		}
 
-	} );
+	});
 
-	grunt.registerTask( 'default', ['jshint', 'watch']);
+	grunt.registerTask( 'default', [ 'jshint', 'watch' ]);
 
 };
