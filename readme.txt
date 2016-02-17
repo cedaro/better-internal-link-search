@@ -77,6 +77,11 @@ If your site has a lot of content, the automatic search feature may cause it to 
 
 == Changelog ==
 
+= 1.2.11 =
+* Loaded scripts and styles anywhere the editor is loaded to make the improved internal searching available. Props [joostdevalk](https://profiles.wordpress.org/joostdevalk/).
+* Updated German translation. Props [wpdocde](https://profiles.wordpress.org/wpdocde/).
+* Fixed a typo in the help text. Props [christophherr](https://profiles.wordpress.org/christophherr).
+
 = 1.2.10 =
 * Fixed a bug when using with Advanced Custom Fields. Props [lmartins](https://wordpress.org/support/profile/lmartins) and [coreyw](https://wordpress.org/support/profile/coreyw).
 
