@@ -77,6 +77,10 @@ If your site has a lot of content, the automatic search feature may cause it to 
 
 == Changelog ==
 
+= 1.2.12 =
+* Prevent errors with other plugins using AJAX when internal-link-manager.js is enqueued.
+* Removed German translation files in favor of WordPress.org language packs.
+
 = 1.2.11 =
 * Loaded scripts and styles anywhere the editor is loaded to make the improved internal searching available. Props [joostdevalk](https://profiles.wordpress.org/joostdevalk/).
 * Updated German translation. Props [wpdocde](https://profiles.wordpress.org/wpdocde/).
