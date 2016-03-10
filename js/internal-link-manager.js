@@ -128,7 +128,12 @@
 	 * Filter AJAX requests.
 	 */
 	$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
-		if ( 'data' in options && -1 !== options.data.indexOf( 'action=wp-link-ajax' ) && -1 !== options.data.indexOf( 'search=' ) ) {
+		if (
+			'data' in options &&
+			'string' === typeof options.data &&
+			-1 !== options.data.indexOf( 'action=wp-link-ajax' ) &&
+			-1 !== options.data.indexOf( 'search=' )
+		) {
 			// Abort the request if it's just for resetting the river.
 			if ( -1 !== options.data.indexOf( 'better-internal-link-search-reset-river-flag' ) ) {
 				jqXHR.abort();
