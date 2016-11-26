@@ -6,3 +6,4 @@
 .gitignore export-ignore
 .jshintrc export-ignore
 package.json export-ignore
+README.md export-ignore
