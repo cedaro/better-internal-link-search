@@ -3,7 +3,7 @@
   "version": "1.2.12",
   "description": "A WordPress plugin to improve the internal linking experience.",
   "license": "GPL-2.0+",
-  "repository": "bradyvercher/better-internal-link-search",
+  "repository": "cedaro/better-internal-link-search",
   "author": {
     "name": "Brady Vercher",
     "email": "brady@blazersix.com",
