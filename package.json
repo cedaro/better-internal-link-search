@@ -2,27 +2,18 @@
   "name": "better-internal-link-search",
   "version": "1.2.12",
   "description": "A WordPress plugin to improve the internal linking experience.",
-  "main": "Gruntfile.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bradyvercher/better-internal-link-search.git"
-  },
+  "license": "GPL-2.0+",
+  "repository": "bradyvercher/better-internal-link-search",
   "author": {
     "name": "Brady Vercher",
     "email": "brady@blazersix.com",
-    "url": "http://www.blazersix.com/"
+    "url": "https://www.cedaro.com/"
   },
-  "license": "GPL-2.0+",
-  "bugs": {
-    "url": "https://github.com/bradyvercher/better-internal-link-search/issues"
+  "scripts": {
+    "build": "npm run lint && npm run uglify",
+    "lint": "jshint js/*.js --exclude=js/*.min.js"
   },
-  "homepage": "https://github.com/bradyvercher/better-internal-link-search",
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "^0.11.3",
-    "grunt-contrib-uglify": "^0.11.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-wp-i18n": "^0.5.3",
-    "matchdep": "^1.0.0"
+    "jshint": "^2.9.2"
   }
 }
