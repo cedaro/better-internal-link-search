@@ -1,20 +1,24 @@
 <?php
 /**
+ * Better Internal Link Search
+ *
+ * @package   BetterInternalLinkSearch
+ * @author    Brady Vercher
+ * @link      https://www.cedaro.com/
+ * @copyright Copyright (c) 2016 Cedaro, Inc.
+ * @license   GPL-2.0+
+ *
+ * @wordpress-plugin
  * Plugin Name: Better Internal Link Search
- * Plugin URI: http://wordpress.org/extend/plugins/better-internal-link-search/
+ * Plugin URI:  http://wordpress.org/plugins/better-internal-link-search/
  * Description: Improve the internal link popup functionality with time saving enhancements and features.
- * Version: 1.2.12
- * Author: Blazer Six
- * Author URI: http://www.blazersix.com/
- * License: GPL-2.0+
- * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Version:     1.2.12
+ * Author:      Cedaro
+ * Author URI:  https://www.cedaro.com/
+ * License:     GPL-2.0+
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: better-internal-link-search
  * Domain Path: /languages
- *
- * @package BetterInternalLinkSearch
- * @author Brady Vercher <brady@blazersix.com>
- * @copyright Copyright (c) 2013, Blazer Six, Inc.
- * @license http://www.gnu.org/licenses/gpl-2.0.html
  */
 
 /**
