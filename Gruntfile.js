@@ -18,19 +18,6 @@ module.exports = function( grunt ) {
 			]
 		},
 
-		makepot: {
-			plugin: {
-				options: {
-					mainFile: 'better-internal-link-search.php',
-					potHeaders: {
-						poedit: true
-					},
-					type: 'wp-plugin',
-					updateTimestamp: false
-				}
-			}
-		},
-
 		uglify: {
 			dist: {
 				files: [

@@ -18,7 +18,6 @@
  * License:     GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: better-internal-link-search
- * Domain Path: /languages
  */
 
 /**
@@ -89,7 +88,7 @@ class Better_Internal_Link_Search {
 	 * @since 1.2.3
 	 */
 	public static function load_textdomain() {
-		load_plugin_textdomain( 'better-internal-link-search', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'better-internal-link-search' );
 	}
 
 	/**
