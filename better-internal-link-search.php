@@ -112,6 +112,7 @@ class Better_Internal_Link_Search {
 			);
 
 			if ( in_array( $_POST['action'], $actions ) ) {
+				add_filter( 'wp_link_query_args', array( __CLASS__, 'unsupress_posts_search_filters' ) );
 				add_filter( 'posts_search', array( __CLASS__, 'limit_search_to_title' ), 10, 2 );
 				add_action( 'pre_get_posts', array( __CLASS__, 'set_query_vars' ) );
 			}
@@ -175,6 +176,19 @@ class Better_Internal_Link_Search {
 		}
 
 		return $search;
+	}
+
+	/**
+	 * Unsupress posts search filters.
+	 *
+	 * The 'posts_search' filter was disabled for internal link searches in
+	 * https://core.trac.wordpress.org/ticket/35594
+	 *
+	 * @since 1.3.0
+	 */
+	public static function unsupress_posts_search_filters( $args ) {
+		$args['suppress_filters'] = false;
+		return $args;
 	}
 
 	/**
