@@ -7,8 +7,8 @@
 		var $postFilters = $( '#posts-filter' ),
 			$pagesNav = $postFilters.find( '.tablenav-pages' ),
 			$searchField = $( '#post-search-input, #media-search-input' ),
-			$searchStatus = $( '<table><tr class="no-items"><td class="colspanchange">' + BilsListTable.spinner + '</td></tr></table>' ),
-			$spinner = $searchField.before( BilsListTable.spinner ).siblings( '.spinner' ),
+			$searchStatus = $( '<table><tr class="no-items"><td class="colspanchange"><span class="spinner is-active"></span></td></tr></table>' ),
+			$spinner = $searchField.before( '<span class="spinner"></span>' ).siblings( '.spinner' ),
 			$theList = $( '#the-list' ),
 			$title = $( '#wpbody h2:eq(0)' ),
 			$subtitle = $title.find( '.subtitle' ),
@@ -59,9 +59,9 @@
 			}
 
 			// Begin searching.
-			$spinner.show();
+			$spinner.addClass( 'is-active' );
 			$pagesNav.hide();
-			$theList.html( $searchStatus.html() );
+			$theList.html( $searchStatus.find( 'tr' ).parent().html() );
 
 			requestArgs['s'] = $searchField.val();
 
@@ -73,12 +73,12 @@
 
 					$subtitle.html( subtitlePrefix.replace( '%s', searchTerm ) ).show();
 
-					$spinner.hide();
+					$spinner.removeClass( 'is-active' );
 				}
 			});
 		};
 
-		$searchField.on( 'keydown.bils', function( e ) {
+		$searchField.on( 'input.bils', function( e ) {
 			var code = e.keyCode || e.which;
 
 			clearTimeout(timeout);

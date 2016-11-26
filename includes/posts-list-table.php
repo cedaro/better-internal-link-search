@@ -48,15 +48,12 @@ class Better_Internal_Link_Search_Posts_List_Table {
 			'postMimeType'   => ( isset( $_REQUEST['post_mime_type'] ) ) ? $_REQUEST['post_mime_type'] : null,
 			'postType'       => ( 'upload' == $screen->id ) ? 'attachment' : $screen->post_type,
 			'screen'         => $screen->id,
-			'spinner'        => self::spinner( array( 'echo' => false ) ),
 			'subtitlePrefix' => __( 'Search results for &#8220;%s&#8221;', 'better-internal-link-search' ),
 		) );
 		?>
 		<style type="text/css">
-		.wp-list-table #the-list .no-items img.ajax-loading,
-		#posts-filter .search-box img.ajax-loading { visibility: visible;}
-		.wp-list-table #the-list .no-items .spinner { display: inline;}
-		#posts-filter .search-box .spinner { display: none; float: left; margin: 5px 3px 0 0;}
+		.wp-list-table #the-list .no-items .spinner,
+		#posts-filter .search-box .spinner { float: left;}
 		</style>
 		<?php
 	}
@@ -138,39 +135,5 @@ class Better_Internal_Link_Search_Posts_List_Table {
 		$wp_list_table->display_rows_or_placeholder();
 
 		wp_die();
-	}
-
-	/**
-	 * Backwards compatible spinner.
-	 *
-	 * Displays the correct spinner depending on the version of WordPress.
-	 *
-	 * @since 1.2.0
-	 *
-	 * @param array $args Array of args to modify output.
-	 * @return void|string Echoes spinner HTML or returns it.
-	 */
-	public static function spinner( $args = array() ) {
-		$args = wp_parse_args( $args, array(
-			'id'    => '',
-			'class' => 'ajax-loading',
-			'echo'  => true,
-		) );
-
-		if ( version_compare( get_bloginfo( 'version' ), '3.5-beta-1', '<' ) ) {
-			$spinner = sprintf( '<img src="%1$s" id="%2$s" class="spinner %3$s" alt="">',
-				esc_url( admin_url( 'images/wpspin_light.gif' ) ),
-				esc_attr( $args['id'] ),
-				esc_attr( $args['class'] )
-			);
-		} else {
-			$spinner = sprintf( '<span id="%1$s" class="spinner"></span>', esc_attr( $args['id'] ) );
-		}
-
-		if ( $args['echo'] ) {
-			echo $spinner;
-		} else {
-			return $spinner;
-		}
 	}
 }
