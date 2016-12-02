@@ -56,8 +56,6 @@ class Better_Internal_Link_Search {
 	 * @since 1.0.0
 	 */
 	public static function load() {
-		self::load_textdomain();
-
 		// Load settings.
 		include( BETTER_INTERNAL_LINK_SEARCH_DIR . 'includes/settings.php' );
 		Better_Internal_Link_Search_Settings::load();
@@ -80,15 +78,6 @@ class Better_Internal_Link_Search {
 
 		// Upgrade routine.
 		add_action( 'admin_init', array( __CLASS__, 'upgrade' ) );
-	}
-
-	/**
-	 * Load the plugin language files.
-	 *
-	 * @since 1.2.3
-	 */
-	public static function load_textdomain() {
-		load_plugin_textdomain( 'better-internal-link-search' );
 	}
 
 	/**
