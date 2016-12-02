@@ -63,7 +63,7 @@ echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
 	exit 1
 fi
-exit 1
+
 # Deploy to WordPress.org.
 echo
 echo "Committing to WordPress.org. This may take a while..."
