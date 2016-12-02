@@ -3,9 +3,9 @@
 Improve the internal link popup manager in WordPress with time-saving enhancements and features.
 
 __Contributors:__ [Brady Vercher](https://twitter.com/bradyvercher)  
-__Requires:__ 4.1  
-__Tested up to:__ 4.4  
-__License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
+__Requires:__ 4.4  
+__Tested up to:__ 4.7  
+__License:__ [GPL-2.0+](https://www.gnu.org/licenses/gpl-2.0.html)
 
 Better Internal Link Search improves the default internal link searching feature in WordPress in a number of ways, making it faster and easier to find the content you want to link to.
 
@@ -43,3 +43,7 @@ Search modifiers are the most powerful feature of Better Internal Link Search. A
 A few simple modifiers have been included by default and should serve as examples for developers that want to create their own or change the syntax. Basic support is built in for searching Wikipedia, iTunes, Spotify, the WordPress plugin directory, the WordPress Codex, GitHub repositories, listing a user's GitHub Gists, and linking to WordPress author archive URLs.
 
 Type `-help` in the search field to view the available modifiers.
+
+## Installation
+
+*Better Internal Link Search* is available in the [WordPress plugin directory](https://wordpress.org/plugins/better-internal-link-search/), so it can be installed from your admin panel.

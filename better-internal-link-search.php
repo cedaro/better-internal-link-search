@@ -12,7 +12,7 @@
  * Plugin Name: Better Internal Link Search
  * Plugin URI:  https://wordpress.org/plugins/better-internal-link-search/?utm_source=wordpress-plugin&utm_medium=link&utm_content=better-internal-link-search-plugin-uri&utm_campaign=plugins
  * Description: Improve the internal link popup functionality with time saving enhancements and features.
- * Version:     1.2.12
+ * Version:     1.3.0
  * Author:      Cedaro
  * Author URI:  https://www.cedaro.com/?utm_source=wordpress-plugin&utm_medium=link&utm_content=better-internal-link-search-author-uri&utm_campaign=plugins
  * License:     GPL-2.0+
