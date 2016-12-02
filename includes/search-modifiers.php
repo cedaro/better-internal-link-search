@@ -396,10 +396,10 @@ function bils_spotify_search( $results, $args ) {
 	}
 
 	$api_entities = array( 'album', 'artist', 'track' );
-	$entity = ( isset( $args['modifier'][1] ) && in_array( $args['modifier'][1], $api_entities ) ) ? $args['modifier'][1] : 'album';
+	$entity = isset( $args['modifier'][1] ) && in_array( $args['modifier'][1], $api_entities ) ? $args['modifier'][1] : 'album';
 
-	$search_args = array( 'q' => urlencode( $args['s'] ) );
-	$request_uri = add_query_arg( $search_args, 'http://ws.spotify.com/search/1/' . $entity . '.json' );
+	$search_args = array( 'q' => rawurlencode( $args['s'] ), 'type' => $entity );
+	$request_uri = add_query_arg( $search_args, 'https://api.spotify.com/v1/search' );
 
 	$response = wp_remote_get( $request_uri );
 	if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
@@ -408,7 +408,7 @@ function bils_spotify_search( $results, $args ) {
 		$entity_plural = $entity . 's';
 		$objects = $json->{$entity_plural};
 
-		foreach( $objects as $item ) {
+		foreach( $objects->items as $item ) {
 			$title = $item->name;
 			$info = ( 'artist' != $entity ) ? $item->artists[0]->name : '';
 
@@ -420,7 +420,7 @@ function bils_spotify_search( $results, $args ) {
 				'title'     => trim( esc_html( strip_tags( $title ) ) ),
 				'permalink' => sprintf( 'https://open.spotify.com/%s/%s',
 					$entity,
-					str_replace( 'spotify:' . $entity . ':', '', $item->href )
+					$item->id
 				),
 				'info'      => trim( esc_html( strip_tags( $info ) ) ),
 			);
