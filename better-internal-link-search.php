@@ -10,11 +10,11 @@
  *
  * @wordpress-plugin
  * Plugin Name: Better Internal Link Search
- * Plugin URI:  http://wordpress.org/plugins/better-internal-link-search/
+ * Plugin URI:  https://wordpress.org/plugins/better-internal-link-search/?utm_source=wordpress-plugin&utm_medium=link&utm_content=better-internal-link-search-plugin-uri&utm_campaign=plugins
  * Description: Improve the internal link popup functionality with time saving enhancements and features.
  * Version:     1.2.12
  * Author:      Cedaro
- * Author URI:  https://www.cedaro.com/
+ * Author URI:  https://www.cedaro.com/?utm_source=wordpress-plugin&utm_medium=link&utm_content=better-internal-link-search-author-uri&utm_campaign=plugins
  * License:     GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: better-internal-link-search
@@ -132,7 +132,7 @@ class Better_Internal_Link_Search {
 	public static function set_query_vars( $query ) {
 		if ( 'bils-get-link-search-results' == $_POST['action'] || 'wp-link-ajax' == $_POST['action'] ) {
 			// Scheduled post concept from Evan Solomon's plugin.
-			// http://wordpress.org/extend/plugins/internal-linking-for-scheduled-posts/
+			// https://wordpress.org/plugins/internal-linking-for-scheduled-posts/
 			$post_status = (array) $query->get( 'post_status' );
 			$post_status[] = 'future';
 			if ( current_user_can( 'read_private_posts' ) ) {

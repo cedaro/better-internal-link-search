@@ -43,7 +43,7 @@ function bils_default_modifier_help( $results ) {
 				'<strong>-codex {query}</strong></span><span class="item-description">%s</span>',
 				__( 'Search the WordPress Codex', 'better-internal-link-search' )
 			),
-			'permalink' => 'http://codex.wordpress.org/',
+			'permalink' => 'https://codex.wordpress.org/',
 			'info'      => __( 'WordPress Codex', 'better-internal-link-search' ),
 		),
 		'gists' => array(
@@ -67,7 +67,7 @@ function bils_default_modifier_help( $results ) {
 				'<strong>-itunes:{entity} {query}</strong></span><span class="item-description">%s</span>',
 				__( "Search iTunes for a particular entity. Entity can be 'album', 'artist', 'podcast' or 'track'; It is optional and defaults to 'album'.", 'better-internal-link-search' )
 			),
-			'permalink' => 'http://www.apple.com/itunes/',
+			'permalink' => 'https://www.apple.com/itunes/',
 			'info'      => __( 'iTunes', 'better-internal-link-search' ),
 		),
 		'media' => array(
@@ -83,7 +83,7 @@ function bils_default_modifier_help( $results ) {
 				'<strong>-plugins {query}</strong></span><span class="item-description">%s</span>',
 				__( 'Search the WordPress plugin directory.', 'better-internal-link-search' )
 			),
-			'permalink' => 'http://wordpress.org/extend/plugins/',
+			'permalink' => 'https://wordpress.org/plugins/',
 			'info'      => __( 'WordPress Plugins', 'better-internal-link-search' ),
 		),
 		'shortlinks' => array(
@@ -99,7 +99,7 @@ function bils_default_modifier_help( $results ) {
 				'<strong>-spotify:{entity} {query}</strong></span><span class="item-description">%s</span>',
 				__( "Search Spotify for a particular entity. Entity can be 'album', 'artist', or 'track'; is optional and defaults to 'album'.", 'better-internal-link-search' )
 			),
-			'permalink' => 'http://www.spotify.com/',
+			'permalink' => 'https://www.spotify.com/',
 			'info'      => __( 'Spotify', 'better-internal-link-search' ),
 		),
 		'user' => array(
@@ -112,7 +112,7 @@ function bils_default_modifier_help( $results ) {
 		),
 		'wikipedia' => array(
 			'title'     => '<strong>-wikipedia {query}</strong></span>',
-			'permalink' => 'http://www.wikipedia.org/',
+			'permalink' => 'https://www.wikipedia.org/',
 			'info'      => __( 'Wikipedia', 'better-internal-link-search' ),
 		),
 	);
@@ -143,7 +143,7 @@ function bils_wpcodex_search( $results, $args ) {
 		'format'   => 'json',
 	);
 
-	$request_uri = add_query_arg( $search_args, 'http://codex.wordpress.org/api.php' );
+	$request_uri = add_query_arg( $search_args, 'https://codex.wordpress.org/api.php' );
 
 	$response = wp_remote_get( $request_uri );
 	if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
@@ -152,7 +152,7 @@ function bils_wpcodex_search( $results, $args ) {
 		foreach( $json->query->search as $item ) {
 			$results[] = array(
 				'title'     => trim( esc_html( strip_tags( $item->title ) ) ),
-				'permalink' => 'http://codex.wordpress.org/' . $item->title,
+				'permalink' => 'https://codex.wordpress.org/' . $item->title,
 				'info'      => '',
 			);
 		}
@@ -273,7 +273,7 @@ function bils_itunes_search( $results, $args ) {
 		'term'   => urlencode( $args['s'] ),
 	);
 
-	$request_uri = add_query_arg( $search_args, 'http://itunes.apple.com/search' );
+	$request_uri = add_query_arg( $search_args, 'https://itunes.apple.com/search' );
 
 	$response = wp_remote_get( $request_uri );
 	if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
@@ -418,7 +418,7 @@ function bils_spotify_search( $results, $args ) {
 
 			$results[] = array(
 				'title'     => trim( esc_html( strip_tags( $title ) ) ),
-				'permalink' => sprintf( 'http://open.spotify.com/%s/%s',
+				'permalink' => sprintf( 'https://open.spotify.com/%s/%s',
 					$entity,
 					str_replace( 'spotify:' . $entity . ':', '', $item->href )
 				),
@@ -482,7 +482,7 @@ function bils_user_search( $results, $args ) {
 			if ( 'url' == $arg1 ) {
 				$result['permalink'] = esc_url( $user->user_url );
 			} elseif ( 'twitter' == $arg1 ) {
-				$result['permalink'] = 'http://twitter.com/' . trim( esc_html( strip_tags( get_user_meta( $user->ID, 'twitter', true ) ) ) );
+				$result['permalink'] = 'https://twitter.com/' . trim( esc_html( strip_tags( get_user_meta( $user->ID, 'twitter', true ) ) ) );
 			}
 
 			$results[] = $result;
@@ -515,7 +515,7 @@ function bils_wikipedia_search( $results, $args ) {
 		'format'   => 'json',
 	);
 
-	$request_uri = add_query_arg( $search_args, 'http://en.wikipedia.org/w/api.php' );
+	$request_uri = add_query_arg( $search_args, 'https://en.wikipedia.org/w/api.php' );
 
 	$response = wp_remote_get( $request_uri );
 	if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
@@ -526,7 +526,7 @@ function bils_wikipedia_search( $results, $args ) {
 			foreach( $json->query->search as $item ) {
 				$results[] = array(
 					'title'     => trim( esc_html( strip_tags( $item->title ) ) ),
-					'permalink' => 'http://www.wikipedia.org/wiki/' . $item->title,
+					'permalink' => 'https://www.wikipedia.org/wiki/' . $item->title,
 					'info'      => '',
 				);
 			}
